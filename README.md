@@ -1,122 +1,78 @@
-# 🗳️ VoteSaathi
+# 🗳️ VoteSaathi: Your Digital Election Companion
 
-> A context-aware Indian election assistant powered by **Gemini AI**, **Google Maps**, and **Firebase**.
+[![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.109-009688?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
+[![Firebase](https://img.shields.io/badge/Firebase-Auth%20%26%20Firestore-FFCA28?style=for-the-badge&logo=firebase)](https://firebase.google.com/)
+[![Google Gemini](https://img.shields.io/badge/Google%20Gemini-AI%20Assistant-4285F4?style=for-the-badge&logo=google-gemini)](https://ai.google.dev/)
+[![Google Maps](https://img.shields.io/badge/Google%20Maps-Geospatial-4285F4?style=for-the-badge&logo=google-maps)](https://mapsplatform.google.com/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
 
----
-
-## 📁 Project Structure
-
-```
-VoteSaathi/
-├── frontend/          # Next.js 14 + Tailwind CSS (React)
-│   └── src/
-│       ├── app/       # All pages (App Router)
-│       ├── lib/       # Firebase, Firestore helpers
-│       ├── store/     # Zustand global state
-│       ├── hooks/     # useAuth, useGeolocation
-│       └── types/     # Shared TypeScript types
-│
-└── backend/           # Python FastAPI server
-    ├── venv/          # Python virtual environment (created by setup.bat)
-    ├── main.py        # FastAPI app entry point
-    ├── gemini_service.py  # Gemini AI prompt engine
-    ├── maps_service.py    # Google Maps integration
-    ├── firebase_client.py # Firebase Admin SDK
-    ├── schemas.py         # Pydantic request/response models
-    ├── config.py          # Settings from .env
-    └── requirements.txt   # Python dependencies
-```
+**VoteSaathi** is a context-aware, accessible digital public utility designed to empower Indian citizens through the democratic process. It provides personalized election guidance, multi-language AI assistance, and real-time polling booth navigation to ensure no voter is left behind.
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Key Features
 
-### 1. Backend
+### 🤖 AI-Powered "Saathi" Assistant
+A context-aware chatbot powered by **Google Gemini** that provides authoritative voting guidance.
+*   **Multilingual Support**: Available in English, Hindi, and Telugu (with support for 6+ more regional languages).
+*   **Personalized Context**: Tailors advice based on the user's age, location, and voting history (First-time vs. Experienced).
 
+### 📍 Real-Time Constituency Mapping
+Integrated with **Google Maps API** for precise geospatial navigation.
+*   **Polling Booth Locator**: Automatically detects the user's constituency and maps nearby polling stations with multi-marker visualization.
+*   **Live Directions**: Provides exact coordinates and addresses for verified polling booths.
+
+### ♿ Universal Accessibility Engine
+Built with inclusivity at its core for elderly and differently-abled voters.
+*   **Dynamic Themes**: Support for Light, Dark, and High-Contrast modes.
+*   **Accessibility Toolbar**: One-click toggles for Dyslexia-friendly fonts, Text Scaling, and Screen Reader optimization.
+
+### 📋 Official Resource Hub
+*   **Direct Links**: Access to the ECI Voter Portal, 1950 Helpline, and Grievance portals.
+*   **Personalized Reminders**: Set election dates and polling day alerts.
+
+---
+
+## 🛠️ Technical Stack
+
+- **Frontend**: Next.js 15 (App Router), TypeScript, Tailwind CSS, Framer Motion, Lucide React.
+- **Backend**: FastAPI (Python), Pydantic, Uvicorn.
+- **AI/ML**: Google Gemini (generative-ai SDK).
+- **Cloud Services**: Firebase (Auth, Firestore), Google Cloud Platform (GCP).
+- **APIs**: Google Maps JavaScript API, Reverse Geocoding API, Places API.
+
+---
+
+## 📦 Installation & Setup
+
+### Prerequisites
+- Node.js (v18+)
+- Python (v3.10+)
+- Google Cloud API Key (Gemini & Maps)
+- Firebase Project Credentials
+
+### 1. Backend Setup
 ```bash
 cd backend
-
-# Windows
-setup.bat
-
-# macOS / Linux
-bash setup.sh
-
-# Copy and fill in env vars
-copy .env.example .env
-
-# Start server
-venv\Scripts\activate       # Windows
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+# Configure your .env file with API keys
 python main.py
-# → API running at http://localhost:8000
-# → Swagger docs at http://localhost:8000/docs
 ```
 
-### 2. Frontend
-
+### 2. Frontend Setup
 ```bash
 cd frontend
-
-# Install dependencies
 npm install
-
-# Copy and fill in env vars
-copy .env.local.example .env.local
-
-# Start dev server
+# Configure your .env.local with Firebase & Backend URL
 npm run dev
-# → App running at http://localhost:3000
 ```
 
 ---
 
-## 🔑 Environment Variables
+## 🏛️ Digital Public Utility
+VoteSaathi is designed to be a **Digital Public Infrastructure (DPI)** component, prioritizing privacy, security, and accessibility for all Indian citizens.
 
-### Backend (`backend/.env`)
-| Variable | Description |
-|---|---|
-| `GEMINI_API_KEY` | Google AI Studio API key |
-| `GOOGLE_MAPS_API_KEY` | Google Maps Platform API key |
-| `FIREBASE_SERVICE_ACCOUNT_PATH` | Path to Firebase Admin service account JSON |
-| `ALLOWED_ORIGINS` | Comma-separated list of allowed CORS origins |
-
-### Frontend (`frontend/.env.local`)
-| Variable | Description |
-|---|---|
-| `NEXT_PUBLIC_FIREBASE_*` | Firebase project config (from Firebase console) |
-| `NEXT_PUBLIC_GOOGLE_MAPS_API_KEY` | Google Maps JS API key |
-| `NEXT_PUBLIC_BACKEND_URL` | URL of the FastAPI backend (default: `http://localhost:8000`) |
-
----
-
-## 🌐 Pages
-
-| Route | Description |
-|---|---|
-| `/` | Landing page |
-| `/login` | Sign in |
-| `/register` | Create account |
-| `/onboarding` | 4-step profile setup |
-| `/dashboard` | Feature hub |
-| `/chat` | AI election assistant |
-| `/voting-guide` | Step-by-step voting process |
-| `/constituency` | Find polling booth + map |
-| `/candidates` | List + compare candidates |
-| `/reminders` | Set election reminders |
-| `/settings` | Profile, language, privacy |
-
----
-
-## 🛠️ Tech Stack
-
-| Layer | Technology |
-|---|---|
-| Frontend | Next.js 14 (App Router), TypeScript, Tailwind CSS |
-| State | Zustand (persisted) |
-| Animation | Framer Motion |
-| Backend | Python FastAPI + Uvicorn |
-| AI | Google Gemini 1.5 Flash |
-| Maps | Google Maps Geocoding + Places API |
-| Database | Firebase Firestore |
-| Auth | Firebase Authentication |
-| Notifications | Firebase Cloud Messaging |
+Made with ❤️ for Indian Voters.

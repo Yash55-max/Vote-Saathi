@@ -55,6 +55,43 @@ function Shield({ size, className }: { size?: number, className?: string }) {
 }
 
 export default function VotingGuidePage() {
+  const { t } = useTranslation();
+  
+  const localizedSteps = [
+    {
+      id: 1,
+      title: t('guideStep1Title') || 'Check Your Voter Registration',
+      desc: t('guideStep1Desc') || 'Before election day, ensure your name appears on the official electoral roll.',
+      icon: UserCheck,
+      footer: t('guideStep1Footer') || 'Online verification takes 2 minutes',
+      footerIcon: Clock
+    },
+    {
+      id: 2,
+      title: t('guideStep2Title') || 'Locate Your Polling Station',
+      desc: t('guideStep2Desc') || 'Find out exactly where you need to go to cast your vote.',
+      icon: MapPin,
+      footer: t('guideStep2Footer') || 'Find your assigned booth on the map',
+      footerIcon: Search
+    },
+    {
+      id: 3,
+      title: t('guideStep3Title') || 'Bring Valid Identification',
+      desc: t('guideStep3Desc') || 'You must prove your identity before voting. Carry your Voter ID Card (EPIC).',
+      icon: FileText,
+      footer: t('guideStep3Footer') || 'Original ID proof is mandatory',
+      footerIcon: FileText
+    },
+    {
+      id: 4,
+      title: t('guideStep4Title') || 'Cast Your Vote Securely',
+      desc: t('guideStep4Desc') || 'At the booth, an official will verify your ID and mark your finger with ink.',
+      icon: Fingerprint,
+      footer: t('guideStep4Footer') || 'Wait for the beep sound to confirm',
+      footerIcon: Clock
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-white">
       {/* Navbar */}
@@ -65,10 +102,10 @@ export default function VotingGuidePage() {
             Vote Saathi
           </Link>
           <div className="hidden md:flex items-center gap-6">
-            <Link href="/" className="text-sm font-medium text-slate-500 hover:text-primary transition-colors">Home</Link>
-            <Link href="/dashboard" className="text-sm font-medium text-slate-500 hover:text-primary transition-colors">Dashboard</Link>
-            <Link href="/voting-guide" className="text-sm font-semibold text-primary border-b-2 border-primary pb-1">Guide</Link>
-            <Link href="/candidates" className="text-sm font-medium text-slate-500 hover:text-primary transition-colors">Candidates</Link>
+            <Link href="/" className="text-sm font-medium text-slate-500 hover:text-primary transition-colors">{t('home')}</Link>
+            <Link href="/dashboard" className="text-sm font-medium text-slate-500 hover:text-primary transition-colors">{t('dashboard')}</Link>
+            <Link href="/voting-guide" className="text-sm font-semibold text-primary border-b-2 border-primary pb-1">{t('guide')}</Link>
+            <Link href="/candidates" className="text-sm font-medium text-slate-500 hover:text-primary transition-colors">{t('candidates')}</Link>
           </div>
         </div>
         <div className="flex items-center gap-4">
@@ -84,14 +121,14 @@ export default function VotingGuidePage() {
           animate={{ opacity: 1, y: 0 }}
           className="mb-16"
         >
-          <h1 className="text-4xl font-extrabold text-primary mb-4 text-center md:text-left">Step-by-Step Voting Guide</h1>
+          <h1 className="text-4xl font-extrabold text-primary mb-4 text-center md:text-left">{t('guideHeading') || 'Step-by-Step Voting Guide'}</h1>
           <p className="text-slate-500 text-lg leading-relaxed max-w-2xl text-center md:text-left">
-            Follow these simple steps to cast your vote confidently. This guide is designed to be clear and easy to read for everyone.
+            {t('guideSub') || 'Follow these simple steps to cast your vote confidently.'}
           </p>
         </motion.div>
 
         <div className="space-y-8">
-          {steps.map((step, i) => (
+          {localizedSteps.map((step, i) => (
             <motion.div
               key={step.id}
               initial={{ opacity: 0, x: -20 }}
@@ -104,7 +141,7 @@ export default function VotingGuidePage() {
                 <div className="w-14 h-14 rounded-2xl bg-primary flex items-center justify-center text-white text-2xl font-black shadow-lg shadow-primary/20">
                   {step.id}
                 </div>
-                {i < steps.length - 1 && (
+                {i < localizedSteps.length - 1 && (
                   <div className="w-1 flex-1 bg-slate-100 my-4 rounded-full" />
                 )}
               </div>
@@ -130,12 +167,12 @@ export default function VotingGuidePage() {
                  <Vote size={24} />
               </div>
               <div>
-                 <h4 className="font-bold text-primary">Ready to cast your vote?</h4>
-                 <p className="text-slate-400 text-sm">Check your booth and candidates today.</p>
+                 <h4 className="font-bold text-primary">{t('readyToVote') || 'Ready to cast your vote?'}</h4>
+                 <p className="text-slate-400 text-sm">{t('checkBoothToday') || 'Check your booth and candidates today.'}</p>
               </div>
            </div>
            <Link href="/dashboard" className="px-8 py-3 bg-primary text-white rounded-xl font-bold shadow-lg shadow-primary/20 hover:bg-primary-700 transition-all">
-             Back to Dashboard
+             {t('backToDashboard') || 'Back to Dashboard'}
            </Link>
         </div>
       </div>

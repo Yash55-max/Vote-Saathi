@@ -98,41 +98,49 @@ export default function ConstituencyPage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Map Section */}
           <div className="lg:col-span-2 bg-white rounded-3xl border border-slate-100 shadow-xl shadow-slate-200/40 overflow-hidden relative">
+             {!constituencyData && (
+                <div className="absolute inset-0 z-20 flex items-center justify-center bg-white/60 backdrop-blur-sm">
+                   <button 
+                    onClick={handleLocate}
+                    disabled={locating}
+                    className="px-8 py-3 bg-primary text-white rounded-xl font-bold shadow-xl shadow-primary/20 hover:scale-105 transition-all flex items-center gap-3"
+                   >
+                     {locating ? <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : <Navigation size={20} />}
+                     Locate My Constituency
+                   </button>
+                </div>
+             )}
              <div className="absolute top-6 left-6 z-10 flex gap-2">
                 <div className="px-4 py-2 bg-white rounded-full shadow-md flex items-center gap-2 text-xs font-bold text-primary border border-slate-100">
-                   <div className="w-2 h-2 rounded-full bg-orange-500" /> Your Booth
+                   <div className="w-2 h-2 rounded-full bg-orange-500" /> {t('yourBooth')}
                 </div>
                 <div className="px-4 py-2 bg-white rounded-full shadow-md flex items-center gap-2 text-xs font-bold text-slate-400 border border-slate-100">
-                   <div className="w-2 h-2 rounded-full bg-slate-300" /> Other Booths
+                   <div className="w-2 h-2 rounded-full bg-slate-300" /> {t('otherBooths')}
                 </div>
              </div>
              
              {/* Map Placeholder */}
              <div className="h-[600px] bg-slate-900 relative flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 opacity-40 bg-[url('https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&q=80&w=1000')] bg-cover grayscale invert" />
-                <div className="relative">
-                   {/* Mock pins */}
-                   <div className="absolute top-[-40px] left-[-20px]">
-                      <div className="w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center text-white shadow-xl shadow-orange-500/40 animate-bounce">
-                         <MapPin size={24} />
-                      </div>
-                      <div className="bg-white/90 backdrop-blur px-3 py-1 rounded-lg text-[10px] font-bold text-primary mt-2 whitespace-nowrap shadow-md">
-                         Govt. Senior Secondary School
-                      </div>
-                   </div>
-                   <div className="absolute top-[80px] left-[100px]">
-                      <div className="w-6 h-6 rounded-full bg-slate-400 border-2 border-white" />
-                   </div>
-                   <div className="absolute top-[-100px] left-[-150px]">
-                      <div className="w-6 h-6 rounded-full bg-slate-400 border-2 border-white" />
-                   </div>
-                </div>
+                {constituencyData && (
+                  <div className="relative">
+                    {/* Real-ish pins */}
+                    <div className="absolute top-[-40px] left-[-20px]">
+                        <div className="w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center text-white shadow-xl shadow-orange-500/40 animate-bounce">
+                          <MapPin size={24} />
+                        </div>
+                        <div className="bg-white/90 backdrop-blur px-3 py-1 rounded-lg text-[10px] font-bold text-primary mt-2 whitespace-nowrap shadow-md">
+                          {booths[0]?.name || 'Your Assigned Booth'}
+                        </div>
+                    </div>
+                  </div>
+                )}
                 
                 {/* Map Controls */}
                 <div className="absolute bottom-6 right-6 flex flex-col gap-2">
                    <button className="w-10 h-10 bg-white rounded-xl shadow-lg flex items-center justify-center text-slate-400 font-bold">+</button>
                    <button className="w-10 h-10 bg-white rounded-xl shadow-lg flex items-center justify-center text-slate-400 font-bold">-</button>
-                   <button className="w-10 h-10 bg-white rounded-xl shadow-lg flex items-center justify-center text-primary"><Navigation size={18} /></button>
+                   <button onClick={handleLocate} className="w-10 h-10 bg-white rounded-xl shadow-lg flex items-center justify-center text-primary"><Navigation size={18} /></button>
                 </div>
              </div>
           </div>
@@ -142,8 +150,8 @@ export default function ConstituencyPage() {
              <div className="bg-white rounded-3xl border border-slate-100 shadow-xl shadow-slate-200/40 p-8">
                 <div className="flex items-start justify-between mb-8">
                    <div>
-                      <span className="text-[10px] font-bold text-slate-300 uppercase tracking-widest mb-1 block">Parliamentary Constituency</span>
-                      <h2 className="text-2xl font-extrabold text-primary">New Delhi</h2>
+                      <span className="text-[10px] font-bold text-slate-300 uppercase tracking-widest mb-1 block">{t('parliamentaryConstituency')}</span>
+                      <h2 className="text-2xl font-extrabold text-primary">{constituencyData?.constituency || 'Pending...'}</h2>
                    </div>
                    <div className="w-12 h-12 bg-primary/5 rounded-2xl flex items-center justify-center text-primary">
                       <Building2 size={24} />
@@ -152,48 +160,43 @@ export default function ConstituencyPage() {
 
                 <div className="grid grid-cols-2 gap-6">
                    <div>
-                      <p className="text-[10px] font-bold text-slate-300 uppercase tracking-widest mb-1">Phase</p>
-                      <p className="font-extrabold text-primary">Phase 6</p>
+                      <p className="text-[10px] font-bold text-slate-300 uppercase tracking-widest mb-1">{t('phase')}</p>
+                      <p className="font-extrabold text-primary">{constituencyData?.state || 'N/A'}</p>
                    </div>
                    <div>
-                      <p className="text-[10px] font-bold text-slate-300 uppercase tracking-widest mb-1">Polling Date</p>
-                      <p className="font-extrabold text-primary">25 May</p>
+                      <p className="text-[10px] font-bold text-slate-300 uppercase tracking-widest mb-1">{t('pollingDate')}</p>
+                      <p className="font-extrabold text-primary">TBD</p>
                    </div>
-                </div>
-
-                <div className="mt-8 pt-8 border-t border-slate-50">
-                   <p className="text-[10px] font-bold text-slate-300 uppercase tracking-widest mb-1">Assembly Constituency</p>
-                   <p className="font-extrabold text-primary">AC-40, New Delhi</p>
                 </div>
              </div>
 
              <div className="bg-white rounded-3xl border border-slate-100 shadow-xl shadow-slate-200/40 p-8">
                 <h3 className="font-extrabold text-primary mb-6 flex items-center gap-2">
-                   Polling Booths Near You
-                   <span className="bg-primary/5 text-primary text-[10px] px-2 py-1 rounded-full">{MOCK_BOOTHS.length}</span>
+                   {t('nearbyBooths')}
+                   <span className="bg-primary/5 text-primary text-[10px] px-2 py-1 rounded-full">{booths.length}</span>
                 </h3>
                 <div className="space-y-6">
-                   {MOCK_BOOTHS.map((booth, i) => (
+                   {booths.map((booth, i) => (
                      <div key={booth.id} className="flex gap-4 group cursor-pointer">
                         <div className="flex flex-col items-center">
                            <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold ${
-                             booth.assigned ? 'bg-orange-500 text-white' : 'bg-slate-100 text-slate-400'
+                             i === 0 ? 'bg-orange-500 text-white' : 'bg-slate-100 text-slate-400'
                            }`}>
                              {i + 1}
                            </div>
-                           {i < MOCK_BOOTHS.length - 1 && <div className="w-[2px] flex-1 bg-slate-50 mt-2" />}
+                           {i < booths.length - 1 && <div className="w-[2px] flex-1 bg-slate-50 mt-2" />}
                         </div>
                         <div className="flex-1 pb-4">
                            <div className="flex items-center justify-between mb-1">
                               <h4 className="font-bold text-primary text-sm group-hover:text-primary/70">{booth.name}</h4>
-                              {booth.assigned && (
-                                <span className="text-[8px] font-black uppercase tracking-tighter bg-orange-100 text-orange-600 px-2 py-0.5 rounded-full">Your Assigned Booth</span>
+                              {i === 0 && (
+                                <span className="text-[8px] font-black uppercase tracking-tighter bg-orange-100 text-orange-600 px-2 py-0.5 rounded-full">{t('yourBooth')}</span>
                               )}
                            </div>
                            <p className="text-slate-400 text-[10px] leading-relaxed mb-3">{booth.address}</p>
                            <div className="flex items-center gap-2">
-                              <span className="text-[10px] font-bold text-orange-600 bg-orange-50 px-2 py-0.5 rounded-md">{booth.distance}</span>
-                              <span className="text-[10px] font-bold text-slate-400 group-hover:text-primary flex items-center gap-1">Get Directions <ChevronRight size={12} /></span>
+                              <span className="text-[10px] font-bold text-orange-600 bg-orange-50 px-2 py-0.5 rounded-md">{booth.distance || 'Near'}</span>
+                              <span className="text-[10px] font-bold text-slate-400 group-hover:text-primary flex items-center gap-1">{t('getDirections')} <ChevronRight size={12} /></span>
                            </div>
                         </div>
                      </div>

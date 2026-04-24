@@ -1,4 +1,4 @@
-# 🗳️ VoteSaathi — CivicGuide AI
+# 🗳️ VoteSaathi
 
 > A context-aware Indian election assistant powered by **Gemini AI**, **Google Maps**, and **Firebase**.
 

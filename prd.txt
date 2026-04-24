@@ -1,0 +1,85 @@
+📌 1. PRODUCT REQUIREMENTS DOCUMENT (PRD)
+1.1 Product Overview
+
+CivicGuide AI is a context-aware election assistant designed to educate and guide citizens through the election process in an interactive, personalized, and accessible way.
+
+1.2 Problem Statement
+Low voter awareness
+Confusing election procedures
+Lack of localized information
+First-time voters struggle
+1.3 Target Users
+Segment	Needs
+First-time voters (18-22)	Step-by-step guidance
+Rural users	Simple language + voice
+Urban users	Fast info + comparison
+Elderly	Accessibility + clarity
+1.4 Goals
+Simplify election participation
+Provide personalized guidance
+Improve voter awareness
+Deliver real-time relevant info
+1.5 Key Features
+🔹 Smart Assistant
+Context-aware responses
+Personalized guidance
+🔹 Voting Guide
+Step-by-step process
+Required documents
+🔹 Location-Based Info
+Constituency
+Polling booths
+Election dates
+🔹 Candidate Insights
+Candidate list
+Comparison (basic)
+🔹 Multilingual Support
+English
+Hindi
+Telugu
+🔹 Notifications
+Reminders for voting
+1.6 User Flow
+User logs in
+Provides basic info (age, location)
+Assistant adapts responses
+User asks queries or selects options
+System responds dynamically
+1.7 Success Metrics
+Task completion rate
+User engagement
+Response accuracy
+Retention rate
+
+🧠 6. PROMPT DESIGN (GEMINI)
+
+Template:
+
+You are an election assistant for India.
+
+User Context:
+
+Age: {age}
+Location: {location}
+Language: {language}
+First-time voter: {yes/no}
+
+Task: Provide clear, step-by-step guidance.
+
+🔄 7. USER JOURNEY
+Open app
+Login
+Enter details
+Ask query
+Receive personalized response
+♿ 8. ACCESSIBILITY
+Simple UI
+Voice support
+Multi-language
+Large fonts
+📊 9. GOOGLE SERVICES USAGE
+Service	Purpose
+Firebase	Auth + DB
+Gemini	AI responses
+Maps	Location
+Cloud Run	Backend

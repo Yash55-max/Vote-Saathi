@@ -9,7 +9,7 @@ module.exports = {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#001A4D', // Deep Navy
+          DEFAULT: 'var(--color-primary)',
           50:  '#E6EDFF',
           100: '#CCD9FF',
           200: '#99B3FF',
@@ -22,15 +22,16 @@ module.exports = {
           900: '#000D26',
         },
         accent: {
-          DEFAULT: '#EA580C', // Orange
+          DEFAULT: 'var(--color-accent)',
           light: '#F97316',
           dark: '#C2410C',
         },
-        background: '#F8FAFC',
-        surface: '#FFFFFF',
-        'surface-2': '#F1F5F9',
-        muted: '#64748B',
-        success: '#10B981',
+        background: 'var(--color-bg)',
+        surface: 'var(--color-surface)',
+        'surface-2': 'var(--color-surface-2)',
+        muted: 'var(--color-muted)',
+        success: 'var(--color-success)',
+        text: 'var(--color-text)',
         warning: '#F59E0B',
         error: '#EF4444',
       },

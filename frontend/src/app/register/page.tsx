@@ -30,7 +30,7 @@ export default function RegisterPage() {
       const userCredential = await createUserWithEmailAndPassword(auth, form.email, form.password);
       await updateProfile(userCredential.user, { displayName: form.name });
       toast.success('Account created successfully');
-      router.push('/dashboard');
+      router.push('/onboarding');
     } catch (err: any) {
       toast.error(err.message || 'Failed to create account');
     } finally {

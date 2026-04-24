@@ -10,7 +10,7 @@ from typing import Optional
 # ─── Chat ────────────────────────────────────────────────────
 
 class ChatContext(BaseModel):
-    language: str = Field(default="en", pattern="^(en|hi|te)$")
+    language: str = Field(default="en", pattern="^(en|hi|te|ta|kn|ml|mr|bn|gu)$")
     age: Optional[int] = Field(default=None, ge=18, le=120)
     location: Optional[str] = None
     first_time_voter: Optional[bool] = None

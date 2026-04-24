@@ -1,6 +1,5 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import { 
   Globe, 
   Accessibility, 
@@ -8,35 +7,23 @@ import {
   Plus, 
   Minus, 
   RefreshCw,
-  Search,
+  Moon,
+  Sun,
   Type
 } from 'lucide-react';
 import { useUserStore } from '@/store/userStore';
+import { useAccessibilityStore } from '@/store/accessibilityStore';
 
 export default function AccessibilityToolbar() {
-  const [fontSize, setFontSize] = useState(2); // 1 to 4
-  const [highContrast, setHighContrast] = useState(false);
+  const { 
+    theme, setTheme, 
+    fontSize, setFontSize, 
+    dyslexicMode, toggleDyslexicMode,
+    reset: resetAccess 
+  } = useAccessibilityStore();
+  
   const updateLanguage = useUserStore((state) => state.updateLanguage);
   const currentLang = useUserStore((state) => state.language);
-
-  useEffect(() => {
-    // Apply Font Size
-    const html = document.documentElement;
-    html.classList.remove('text-scale-1', 'text-scale-2', 'text-scale-3', 'text-scale-4');
-    html.classList.add(`text-scale-${fontSize}`);
-
-    // Apply High Contrast
-    if (highContrast) {
-      html.classList.add('high-contrast');
-    } else {
-      html.classList.remove('high-contrast');
-    }
-  }, [fontSize, highContrast]);
-
-  const reset = () => {
-    setFontSize(2);
-    setHighContrast(false);
-  };
 
   return (
     <div className="bg-[#001A4D] text-white border-b border-white/10 hidden md:block" role="complementary" aria-label="Accessibility Toolbar">
@@ -45,48 +32,68 @@ export default function AccessibilityToolbar() {
           <a href="#main-content" className="skip-link">Skip to main content</a>
           <div className="flex items-center gap-2 border-r border-white/20 pr-4">
              <Accessibility size={14} className="text-orange-500" />
-             Screen Reader Access
+             Screen Reader
           </div>
+          
           <div className="flex items-center gap-4">
-             <span>Text Size:</span>
+             <span>Text:</span>
              <div className="flex items-center gap-1">
                 <button 
-                  onClick={() => fontSize > 1 && setFontSize(fontSize - 1)}
-                  className="w-6 h-6 bg-white/10 hover:bg-white/20 flex items-center justify-center rounded"
-                  aria-label="Decrease text size"
+                  onClick={() => setFontSize('small')}
+                  className={`w-6 h-6 flex items-center justify-center rounded ${fontSize === 'small' ? 'bg-orange-500' : 'bg-white/10 hover:bg-white/20'}`}
                 >
                   <Minus size={10} />
                 </button>
                 <button 
-                  onClick={() => setFontSize(2)}
-                  className={`w-6 h-6 flex items-center justify-center rounded ${fontSize === 2 ? 'bg-orange-500' : 'bg-white/10'}`}
-                  aria-label="Normal text size"
+                  onClick={() => setFontSize('medium')}
+                  className={`w-6 h-6 flex items-center justify-center rounded ${fontSize === 'medium' ? 'bg-orange-500' : 'bg-white/10 hover:bg-white/20'}`}
                 >
                   A
                 </button>
                 <button 
-                  onClick={() => fontSize < 4 && setFontSize(fontSize + 1)}
-                  className="w-6 h-6 bg-white/10 hover:bg-white/20 flex items-center justify-center rounded"
-                  aria-label="Increase text size"
+                  onClick={() => setFontSize('large')}
+                  className={`w-6 h-6 flex items-center justify-center rounded ${fontSize === 'large' ? 'bg-orange-500' : 'bg-white/10 hover:bg-white/20'}`}
                 >
                   <Plus size={10} />
                 </button>
              </div>
+             
+             <button 
+               onClick={toggleDyslexicMode}
+               className={`flex items-center gap-2 px-2 py-1 rounded transition-colors ${dyslexicMode ? 'bg-blue-500' : 'hover:bg-white/10'}`}
+             >
+               <Type size={12} /> Dyslexia
+             </button>
           </div>
         </div>
 
         <div className="flex items-center gap-6">
-          <button 
-            onClick={() => setHighContrast(!highContrast)}
-            className={`flex items-center gap-2 px-3 py-1 rounded transition-colors ${highContrast ? 'bg-yellow-400 text-black' : 'hover:bg-white/10'}`}
-            aria-pressed={highContrast}
-          >
-            <Contrast size={14} />
-            High Contrast
-          </button>
+          <div className="flex items-center gap-2 bg-white/5 rounded-lg p-0.5">
+            <button 
+              onClick={() => setTheme('light')}
+              className={`p-1.5 rounded-md transition-all ${theme === 'light' ? 'bg-white text-primary shadow-sm' : 'text-white/40 hover:text-white'}`}
+              title="Light Mode"
+            >
+              <Sun size={14} />
+            </button>
+            <button 
+              onClick={() => setTheme('dark')}
+              className={`p-1.5 rounded-md transition-all ${theme === 'dark' ? 'bg-white text-primary shadow-sm' : 'text-white/40 hover:text-white'}`}
+              title="Dark Mode"
+            >
+              <Moon size={14} />
+            </button>
+            <button 
+              onClick={() => setTheme('contrast')}
+              className={`p-1.5 rounded-md transition-all ${theme === 'contrast' ? 'bg-yellow-400 text-black shadow-sm' : 'text-white/40 hover:text-white'}`}
+              title="High Contrast"
+            >
+              <Contrast size={14} />
+            </button>
+          </div>
           
-          <button onClick={reset} className="flex items-center gap-2 hover:text-orange-500 transition-colors">
-            <RefreshCw size={12} /> Reset
+          <button onClick={resetAccess} className="flex items-center gap-2 hover:text-orange-500 transition-colors">
+            <RefreshCw size={12} /> {currentLang === 'en' ? 'Reset' : 'पुनर्स्थापित'}
           </button>
 
           <div className="flex items-center gap-3 border-l border-white/20 pl-6">
@@ -94,19 +101,19 @@ export default function AccessibilityToolbar() {
               onClick={() => updateLanguage('en')}
               className={currentLang === 'en' ? 'text-orange-500' : 'hover:text-orange-500'}
             >
-              English
+              EN
             </button>
             <button 
               onClick={() => updateLanguage('hi')}
               className={currentLang === 'hi' ? 'text-orange-500' : 'text-white/40 hover:text-white'}
             >
-              हिंदी
+              HI
             </button>
             <button 
               onClick={() => updateLanguage('te')}
               className={currentLang === 'te' ? 'text-orange-500' : 'text-white/40 hover:text-white'}
             >
-              తెలుగు
+              TE
             </button>
           </div>
         </div>

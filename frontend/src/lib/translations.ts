@@ -1,7 +1,6 @@
 import { Language } from '@/types';
 
-export const translations = {
-  en: {
+const enBase = {
     // Nav
     home: 'Home',
     dashboard: 'Dashboard',
@@ -9,13 +8,13 @@ export const translations = {
     candidates: 'Candidates',
     signIn: 'Sign In',
     getStarted: 'Get Started',
-    
+
     // Hero
     heroTitle: 'Empowering Every Indian to Vote.',
     heroSubtitle: 'Welcome to the official, accessible portal for voter guidance. Find your polling booth, know your candidates, and exercise your democratic right with complete information.',
     startGuidance: 'Start Guidance',
     digitalUtility: 'Digital Public Utility',
-    
+
     // Accessibility Section
     accessibilityHeading: 'Designed for Democratic Accessibility',
     accessibilitySub: 'Our platform adapts to your needs, ensuring every citizen has equal access to critical voting information.',
@@ -25,14 +24,14 @@ export const translations = {
     screenReaderDesc: 'Fully structured content and descriptive labels ensure seamless navigation for visually impaired users.',
     highContrast: 'High Contrast Modes',
     highContrastDesc: 'Toggle specialized visual modes including high contrast and dyslexia-friendly typography for easier reading.',
-    
+
     // Dashboard
     goodMorning: 'Good morning',
     askSaathi: 'Ask Saathi',
     saathiSub: 'Your digital election assistant',
     chatPlaceholder: 'Ask about voting, booths, candidates...',
     checkStatus: 'Check Voter Status',
-    
+
     // Onboarding
     onboardingAge: 'Age Verification',
     onboardingLang: 'Select Language',
@@ -42,11 +41,11 @@ export const translations = {
     selectLangSub: 'Choose the language you prefer for navigating the voting platform.',
     locationSub: 'We use your location to identify your constituency and show you nearby polling booths.',
     voterStatusSub: 'Help us customize your guide based on your experience.',
-    
+
     // General
     back: 'Back',
     continue: 'Continue',
-    footerText: '© 2024 ELECTION COMMISSION OF INDIA. DESIGNED FOR DEMOCRATIC ACCESSIBILITY.',
+    footerText: '© 2026 ELECTION COMMISSION OF INDIA. DESIGNED FOR DEMOCRATIC ACCESSIBILITY.',
     yourBooth: 'Your Booth',
     otherBooths: 'Other Booths',
     parliamentaryConstituency: 'Parliamentary Constituency',
@@ -60,7 +59,52 @@ export const translations = {
     assets: 'Assets',
     criminalCases: 'Criminal Cases',
     party: 'Party',
-  },
+
+    // Voting Guide
+    guideHeading: 'Step-by-Step Voting Guide',
+    guideSub: 'Everything you need to know about exercising your democratic right, from registration to the polling booth.',
+    guideStep1Title: 'Check Your Voter Registration',
+    guideStep1Desc: 'Before election day, ensure your name appears on the official electoral roll. Use our status checker to verify.',
+    guideStep1Footer: 'Online verification takes 2 minutes',
+    guideStep2Title: 'Locate Your Polling Station',
+    guideStep2Desc: 'Find out exactly where you need to go. Use our interactive map to see your assigned booth and directions.',
+    guideStep2Footer: 'Booth details are updated live',
+    guideStep3Title: 'Prepare Your ID Documents',
+    guideStep3Desc: 'Collect your Voter ID (EPIC) or one of the 12 alternative photo identity documents approved by the ECI.',
+    guideStep3Footer: 'Original ID proof is mandatory',
+    guideStep4Title: 'Cast Your Vote Securely',
+    guideStep4Desc: 'At the booth, follow official instructions, verify your identity, and cast your vote on the EVM.',
+    guideStep4Footer: 'Wait for the beep sound to confirm',
+    readyToVote: "Ready to make your mark?",
+    checkBoothToday: "Check your polling booth and candidate list today to be prepared.",
+    backToDashboard: "Back to Dashboard",
+
+    // More Dashboard & UI
+    onboarding: 'Onboarding',
+    settings: 'Settings',
+    reminders: 'Reminders',
+    saathiWelcome: 'Namaskaram! I am Saathi. I can help you find your polling booth, learn about candidates, or understand the voting process. How can I assist you today?',
+    saathiThinking: 'Saathi is thinking...',
+    citizenProfile: 'Citizen Profile',
+    yearsOld: 'Years Old',
+    verifiedEligibility: 'Verified Eligibility',
+    voterType: 'Voter Type',
+    quickActions: 'Quick Actions',
+    help: 'Help',
+    step: 'Step',
+    of: 'of',
+    enterAge: 'Enter your age',
+    allowLocation: 'Allow Location Access',
+    firstTimeVoterLabel: 'First-time Voter',
+    firstTimeVoterDesc: 'This is my first time voting in a general election.',
+    experiencedVoterLabel: 'Experienced Voter',
+    experiencedVoterDesc: 'I have voted in previous elections.',
+    update: 'Update',
+    constituency: 'Constituency',
+};
+
+export const translations: Record<Language, any> = {
+  en: enBase,
   hi: {
     // Nav
     home: 'होम',
@@ -69,13 +113,13 @@ export const translations = {
     candidates: 'उम्मीदवार',
     signIn: 'साइन इन',
     getStarted: 'शुरू करें',
-    
+
     // Hero
     heroTitle: 'हर भारतीय को वोट देने के लिए सशक्त बनाना।',
     heroSubtitle: 'मतदाता मार्गदर्शन के लिए आधिकारिक, सुलभ पोर्टल पर आपका स्वागत है। अपना मतदान केंद्र खोजें, अपने उम्मीदवारों को जानें, और पूरी जानकारी के साथ अपने लोकतांत्रिक अधिकार का प्रयोग करें।',
     startGuidance: 'मार्गदर्शन शुरू करें',
     digitalUtility: 'डिजिटल सार्वजनिक उपयोगिता',
-    
+
     // Accessibility Section
     accessibilityHeading: 'लोकतांत्रिक सुलभता के लिए डिज़ाइन किया गया',
     accessibilitySub: 'हमारा प्लेटफ़ॉर्म आपकी आवश्यकताओं के अनुरूप है, यह सुनिश्चित करता है कि प्रत्येक नागरिक को महत्वपूर्ण मतदान जानकारी तक समान पहुंच प्राप्त हो।',
@@ -85,14 +129,14 @@ export const translations = {
     screenReaderDesc: 'पूरी तरह से संरचित सामग्री और वर्णनात्मक लेबल दृष्टिबाधित उपयोगकर्ताओं के लिए निर्बाध नेविगेशन सुनिश्चित करते हैं।',
     highContrast: 'उच्च कंट्रास्ट मोड',
     highContrastDesc: 'आसान पढ़ने के लिए उच्च कंट्रास्ट और डिस्लेक्सिया-फ्रेंडली टाइपोग्राफी सहित विशेष विज़ुअल मोड टॉगल करें।',
-    
+
     // Dashboard
     goodMorning: 'नमस्ते',
     askSaathi: 'साथी से पूछें',
     saathiSub: 'आपका डिजिटल चुनाव सहायक',
     chatPlaceholder: 'वोटिंग, बूथ, उम्मीदवारों के बारे में पूछें...',
     checkStatus: 'मतदाता स्थिति जांचें',
-    
+
     // Onboarding
     onboardingAge: 'आयु सत्यापन',
     onboardingLang: 'भाषा चुनें',
@@ -102,11 +146,40 @@ export const translations = {
     selectLangSub: 'वोटिंग प्लेटफॉर्म नेविगेट करने के लिए अपनी पसंदीदा भाषा चुनें।',
     locationSub: 'हम आपके निर्वाचन क्षेत्र की पहचान करने और आपको पास के मतदान केंद्र दिखाने के लिए आपके स्थान का उपयोग करते हैं।',
     voterStatusSub: 'अपने अनुभव के आधार पर अपनी मार्गदर्शिका को अनुकूलित करने में हमारी सहायता करें।',
-    
+
     // General
     back: 'पीछे',
     continue: 'जारी रखें',
-    footerText: '© 2024 भारत निर्वाचन आयोग। लोकतांत्रिक सुलभता के लिए डिज़ाइन किया गया।',
+    footerText: '© 2026 भारत निर्वाचन आयोग। लोकतांत्रिक सुलभता के लिए डिज़ाइन किया गया।',
+
+    // Voting Guide
+    guideHeading: 'चरण-दर-चरण मतदान मार्गदर्शिका',
+    guideSub: 'पंजीकरण से लेकर मतदान केंद्र तक, अपने लोकतांत्रिक अधिकार का प्रयोग करने के बारे में वह सब कुछ जो आपको जानना आवश्यक है।',
+    guideStep1Title: 'अपना मतदाता पंजीकरण जांचें',
+    guideStep1Desc: 'चुनाव के दिन से पहले, सुनिश्चित करें कि आपका नाम आधिकारिक मतदाता सूची में है। सत्यापित करने के लिए हमारे स्टेटस चेकर का उपयोग करें।',
+    guideStep1Footer: 'ऑनलाइन सत्यापन में 2 मिनट लगते हैं',
+    guideStep2Title: 'अपना मतदान केंद्र खोजें',
+    guideStep2Desc: 'पता करें कि आपको वोट डालने के लिए वास्तव में कहाँ जाना है। अपना आवंटित बूथ और निर्देश देखने के लिए हमारे इंटरेक्टिव मानचित्र का उपयोग करें।',
+    guideStep2Footer: 'बूथ विवरण लाइव अपडेट किए जाते हैं',
+    guideStep3Title: 'अपने पहचान पत्र तैयार करें',
+    guideStep3Desc: 'अपना मतदाता पहचान पत्र (EPIC) या चुनाव आयोग द्वारा अनुमोदित 12 वैकल्पिक फोटो पहचान दस्तावेजों में से एक एकत्र करें।',
+    guideStep3Footer: 'मूल पहचान पत्र अनिवार्य है',
+    guideStep4Title: 'अपना वोट सुरक्षित रूप से डालें',
+    guideStep4Desc: 'बूथ पर, आधिकारिक निर्देशों का पालन करें, अपनी पहचान सत्यापित करें, और EVM पर अपना वोट डालें।',
+    guideStep4Footer: 'पुष्टि करने के लिए बीप की आवाज़ का इंतज़ार करें',
+    readyToVote: "अपना निशान बनाने के लिए तैयार हैं?",
+    checkBoothToday: "तैयार रहने के लिए आज ही अपने मतदान केंद्र और उम्मीदवार सूची की जांच करें।",
+    backToDashboard: "डैशबोर्ड पर वापस जाएं",
+    constituency: 'निर्वाचन क्षेत्र',
+    settings: 'सेटिंग्स',
+    reminders: 'रिमाइंडर',
+    citizenProfile: 'नागरिक प्रोफाइल',
+    yearsOld: 'साल के',
+    verifiedEligibility: 'सत्यापित पात्रता',
+    voterType: 'मतदाता प्रकार',
+    quickActions: 'त्वरित कार्रवाई',
+    help: 'सहायता',
+    update: 'अपडेट',
   },
   te: {
     // Nav
@@ -116,13 +189,13 @@ export const translations = {
     candidates: 'అభ్యర్థులు',
     signIn: 'సైన్ ఇన్',
     getStarted: 'ప్రారంభించండి',
-    
+
     // Hero
     heroTitle: 'ప్రతి భారతీయుడిని ఓటు వేయడానికి శక్తివంతం చేయడం.',
     heroSubtitle: 'ఓటరు మార్గదర్శకత్వం కోసం అధికారిక, ప్రాప్యత పోర్టల్‌కు స్వాగతం. మీ పోలింగ్ బూత్‌ను కనుగొనండి, మీ అభ్యర్థులను తెలుసుకోండి మరియు పూర్తి సమాచారంతో మీ ప్రజాస్వామ్య హక్కును ఉపయోగించుకోండి.',
     startGuidance: 'మార్గదర్శకత్వం ప్రారంభించండి',
     digitalUtility: 'డిజిటల్ పబ్లిక్ యుటిలిటీ',
-    
+
     // Accessibility Section
     accessibilityHeading: 'ప్రజాస్వామ్య ప్రాప్యత కోసం రూపొందించబడింది',
     accessibilitySub: 'మా ప్లాట్‌ఫారమ్ మీ అవసరాలకు అనుగుణంగా మారుతుంది, ప్రతి పౌరుడికి క్లిష్టమైన ఓటింగ్ సమాచారానికి సమాన ప్రాప్యతను నిర్ధారిస్తుంది.',
@@ -132,14 +205,14 @@ export const translations = {
     screenReaderDesc: 'పూర్తిగా నిర్మాణాత్మకమైన కంటెంట్ మరియు వివరణాత్మక లేబుల్‌లు దృష్టి లోపం ఉన్న వినియోగదారులకు అతుకులు లేని నావిగేషన్‌ను నిర్ధారిస్తాయి.',
     highContrast: 'హై కాంట్రాస్ట్ మోడ్‌లు',
     highContrastDesc: 'సులభంగా చదవడం కోసం హై కాంట్రాస్ట్ మరియు డైస్లెక్సియా-ఫ్రెండ్లీ టైపోగ్రఫీతో సహా ప్రత్యేక దృశ్య మోడ్‌లను టోగుల్ చేయండి.',
-    
+
     // Dashboard
     goodMorning: 'నమస్కారం',
     askSaathi: 'సారథిని అడగండి',
     saathiSub: 'మీ డిజిటల్ ఎన్నికల సహాయకుడు',
     chatPlaceholder: 'ఓటింగ్, బూత్‌లు, అభ్యర్థుల గురించి అడగండి...',
     checkStatus: 'ఓటరు స్థితిని తనిఖీ చేయండి',
-    
+
     // Onboarding
     onboardingAge: 'వయస్సు ధృవీకరణ',
     onboardingLang: 'భాషను ఎంచుకోండి',
@@ -149,10 +222,45 @@ export const translations = {
     selectLangSub: 'ఓటింగ్ ప్లాట్‌ఫారమ్‌ను నావిగేట్ చేయడానికి మీరు ఇష్టపడే భాషను ఎంచుకోండి.',
     locationSub: 'మీ నియోజకవర్గాన్ని గుర్తించడానికి మరియు మీకు సమీపంలోని పోలింగ్ బూత్‌లను చూపించడానికి మేము మీ స్థానాన్ని ఉపయోగిస్తాము.',
     voterStatusSub: 'మీ అనుభవం ఆధారంగా మీ గైడ్‌ను అనుకూలీకరించడంలో మాకు సహాయపడండి.',
-    
+
     // General
     back: 'వెనుకకు',
     continue: 'కొనసాగించు',
-    footerText: '© 2024 భారత ఎన్నికల సంఘం. ప్రజాస్వామ్య ప్రాప్యత కోసం రూపొందించబడింది.',
-  }
+    footerText: '© 2026 భారత ఎన్నికల సంఘం. ప్రజాస్వామ్య ప్రాప్యత కోసం రూపొందించబడింది.',
+
+    // Voting Guide
+    guideHeading: 'దశలవారీ ఓటింగ్ మార్గదర్శిని',
+    guideSub: 'నమోదు నుండి పోలింగ్ బూత్ వరకు, మీ ప్రజాస్వామ్య హక్కును ఉపయోగించుకోవడం గురించి మీరు తెలుసుకోవలసిన ప్రతిదీ.',
+    guideStep1Title: 'మీ ఓటరు నమోదును తనిఖీ చేయండి',
+    guideStep1Desc: 'ఎన్నికల రోజుకు ముందు, అధికారిక ఓటరు జాబితాలో మీ పేరు ఉందని నిర్ధారించుకోండి. ధృవీకరించడానికి మా స్టేటస్ చెకర్‌ని ఉపయోగించండి.',
+    guideStep1Footer: 'ఆన్‌లైన్ ధృవీకరణకు 2 నిమిషాలు పడుతుంది',
+    guideStep2Title: 'మీ పోలింగ్ కేంద్రాన్ని గుర్తించండి',
+    guideStep2Desc: 'ఓటు వేయడానికి మీరు సరిగ్గా ఎక్కడికి వెళ్లాలో తెలుసుకోండి. మీ కేటాయించిన బూత్ మరియు దిశలను చూడటానికి మా ఇంటరాక్టివ్ మ్యాప్‌ను ఉపయోగించండి.',
+    guideStep2Footer: 'బూత్ వివరాలు ప్రత్యక్షంగా నవీకరించబడతాయి',
+    guideStep3Title: 'మీ గుర్తింపు పత్రాలను సిద్ధం చేసుకోండి',
+    guideStep3Desc: 'మీ ఓటరు గుర్తింపు కార్డు (EPIC) లేదా ECI ఆమోదించిన 12 ప్రత్యామ్నాయ ఫోటో గుర్తింపు పత్రాలలో ఒకదాన్ని సేకరించండి.',
+    guideStep3Footer: 'అసలు గుర్తింపు పత్రం తప్పనిసరి',
+    guideStep4Title: 'మీ ఓటును సురక్షితంగా వేయండి',
+    guideStep4Desc: 'బూత్ వద్ద, అధికారిక సూచనలను అనుసరించండి, మీ గుర్తింపును ధృవీకరించండి మరియు EVM లో మీ ఓటు వేయండి.',
+    guideStep4Footer: 'ధృవీకరించడానికి బీప్ శబ్దం కోసం వేచి ఉండండి',
+    readyToVote: "మీ ముద్ర వేయడానికి సిద్ధంగా ఉన్నారా?",
+    checkBoothToday: "సిద్ధంగా ఉండటానికి ఈరోజే మీ పోలింగ్ బూత్ మరియు అభ్యర్థుల జాబితాను తనిఖీ చేయండి.",
+    backToDashboard: "డ్యాష్‌బోర్డ్‌కు తిరిగి వెళ్ళు",
+    constituency: 'నియోజకవర్గం',
+    settings: 'సెట్టింగ్‌లు',
+    reminders: 'రిమైండర్‌లు',
+    citizenProfile: 'పౌర ప్రొఫైల్',
+    yearsOld: 'సంవత్సరాలు',
+    verifiedEligibility: 'ధృవీకరించబడిన అర్హత',
+    voterType: 'ఓటరు రకం',
+    quickActions: 'త్వరిత చర్యలు',
+    help: 'సహాయం',
+    update: 'అప్‌డేట్',
+  },
+  ta: { ...enBase },
+  kn: { ...enBase },
+  ml: { ...enBase },
+  mr: { ...enBase },
+  bn: { ...enBase },
+  gu: { ...enBase },
 };

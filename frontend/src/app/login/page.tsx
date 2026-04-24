@@ -10,23 +10,41 @@ import {
   signInWithPopup, 
   GoogleAuthProvider 
 } from 'firebase/auth';
-import { auth } from '@/lib/firebase';
+import { doc, getDoc } from 'firebase/firestore';
+import { auth, db } from '@/lib/firebase';
+import { useUserStore } from '@/store/userStore';
 import toast from 'react-hot-toast';
 
 export default function LoginPage() {
   const router = useRouter();
+  const setProfile = useUserStore(state => state.setProfile);
   const [showPass, setShowPass] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
+  const handleUserRouting = async (user: any) => {
+    try {
+      const userDoc = await getDoc(doc(db, 'users', user.uid));
+      if (userDoc.exists() && userDoc.data()?.onboardingComplete) {
+        setProfile(userDoc.data() as any);
+        router.push('/dashboard');
+      } else {
+        router.push('/onboarding');
+      }
+    } catch (err) {
+      console.error("Error fetching user profile:", err);
+      router.push('/onboarding');
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      const cred = await signInWithEmailAndPassword(auth, email, password);
       toast.success('Signed in successfully');
-      router.push('/dashboard');
+      await handleUserRouting(cred.user);
     } catch (err: any) {
       toast.error(err.message || 'Failed to sign in');
     } finally {
@@ -37,9 +55,9 @@ export default function LoginPage() {
   const handleGoogle = async () => {
     const provider = new GoogleAuthProvider();
     try {
-      await signInWithPopup(auth, provider);
+      const cred = await signInWithPopup(auth, provider);
       toast.success('Signed in with Google');
-      router.push('/dashboard');
+      await handleUserRouting(cred.user);
     } catch (err: any) {
       toast.error(err.message || 'Google sign-in failed');
     }

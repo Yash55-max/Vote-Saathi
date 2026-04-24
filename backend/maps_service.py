@@ -21,7 +21,6 @@ async def reverse_geocode(lat: float, lng: float) -> dict:
         resp = await client.get(GEOCODE_URL, params={
             "latlng": f"{lat},{lng}",
             "key": settings.google_maps_api_key,
-            "result_type": "administrative_area_level_3|administrative_area_level_2",
             "language": "en",
         })
     data = resp.json()
@@ -32,12 +31,27 @@ async def reverse_geocode(lat: float, lng: float) -> dict:
         "formatted_address": "",
     }
 
+    import logging
+    log = logging.getLogger("votesaathi")
+    
+    if data.get("status") != "OK":
+        log.error(f"Google Maps API Error: {data.get('status')} - {data.get('error_message', 'No error message')}")
+        return result
+
+    if not data.get("results"):
+        log.warning(f"Google Maps API: No results found for coordinates {lat}, {lng}")
+        return result
+
     if data.get("status") == "OK" and data.get("results"):
         components = data["results"][0].get("address_components", [])
         result["formatted_address"] = data["results"][0].get("formatted_address", "")
         for comp in components:
             types = comp.get("types", [])
             if "administrative_area_level_3" in types or "sublocality_level_1" in types:
+                result["constituency"] = comp.get("long_name", "Unknown")
+                break
+            if "administrative_area_level_2" in types or "locality" in types:
+                # Fallback to district/city if sub-district is missing
                 result["constituency"] = comp.get("long_name", "Unknown")
             if "administrative_area_level_1" in types:
                 result["state"] = comp.get("long_name", "Unknown")

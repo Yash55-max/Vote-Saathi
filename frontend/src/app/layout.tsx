@@ -23,15 +23,18 @@ export const metadata: Metadata = {
 };
 
 import AccessibilityToolbar from '@/components/AccessibilityToolbar';
+import { AccessibilityProvider } from '@/components/AccessibilityProvider';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${poppins.variable}`} suppressHydrationWarning>
       <body className="bg-background min-h-screen antialiased" suppressHydrationWarning>
-        <AccessibilityToolbar />
-        <div id="main-content">
-          {children}
-        </div>
+        <AccessibilityProvider>
+          <AccessibilityToolbar />
+          <div id="main-content">
+            {children}
+          </div>
+        </AccessibilityProvider>
         <Toaster
           position="top-center"
           toastOptions={{

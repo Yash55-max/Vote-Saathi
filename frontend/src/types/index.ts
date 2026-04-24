@@ -1,6 +1,6 @@
 // ─── Shared TypeScript types ────────────────────────────────
 
-export type Language = 'en' | 'hi' | 'te';
+export type Language = 'en' | 'hi' | 'te' | 'ta' | 'kn' | 'ml' | 'mr' | 'bn' | 'gu';
 
 export interface UserProfile {
   id: string;
@@ -14,7 +14,12 @@ export interface UserProfile {
     constituency?: string;
     state?: string;
   };
+  constituency?: string;
+  state?: string;
+  formatted_address?: string;
+  booths?: PollingBooth[];
   voter_status: 'first_time' | 'returning';
+  voterType?: 'First Time' | 'Experienced';
   onboardingComplete: boolean;
   createdAt?: unknown;
   updatedAt?: unknown;

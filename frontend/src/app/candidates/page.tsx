@@ -98,7 +98,7 @@ export default function CandidatesPage() {
           <input
             value={search}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)}
-            placeholder="Search by name, party, constituency…"
+            placeholder={t('searchCandidates')}
             className="w-full bg-surface border border-white/10 rounded-xl pl-10 pr-4 py-3 text-sm placeholder-muted focus:outline-none focus:border-primary/50 transition-colors"
           />
         </div>
@@ -135,15 +135,15 @@ export default function CandidatesPage() {
                   </div>
                   <div className="grid grid-cols-3 gap-2 mt-3">
                     <div className="text-center">
-                      <p className="text-xs text-muted">Age</p>
+                      <p className="text-xs text-muted">{t('age')}</p>
                       <p className="text-sm font-medium">{c.age}</p>
                     </div>
                     <div className="text-center">
-                      <p className="text-xs text-muted">Assets</p>
+                      <p className="text-xs text-muted">{t('assets')}</p>
                       <p className="text-sm font-medium">{c.assets}</p>
                     </div>
                     <div className="text-center">
-                      <p className="text-xs text-muted">Cases</p>
+                      <p className="text-xs text-muted">{t('criminalCases')}</p>
                       <p className={`text-sm font-medium ${c.criminalCases > 0 ? 'text-error' : 'text-success'}`}>
                         {c.criminalCases === 0 ? '✓ None' : c.criminalCases}
                       </p>
@@ -185,7 +185,7 @@ export default function CandidatesPage() {
               className="glass rounded-2xl p-6 border border-white/10 w-full max-w-2xl max-h-[80vh] overflow-y-auto"
             >
               <div className="flex items-center justify-between mb-6">
-                <h2 className="font-heading font-bold text-xl">Head-to-Head Comparison</h2>
+                <h2 className="font-heading font-bold text-xl">{t('candidateComparison')}</h2>
                 <button onClick={() => setShowCompare(false)} className="text-muted hover:text-white">
                   <X size={20} />
                 </button>
@@ -199,12 +199,12 @@ export default function CandidatesPage() {
                       <span className="text-xs px-2 py-0.5 rounded-full" style={{ backgroundColor: `${c.color}20`, color: c.color }}>{c.partyShort}</span>
                     </div>
                     {[
-                      { label: 'Party',       value: c.party },
-                      { label: 'Constituency', value: c.constituency },
-                      { label: 'Age',          value: String(c.age) },
-                      { label: 'Education',    value: c.education },
-                      { label: 'Assets',       value: c.assets },
-                      { label: 'Criminal Cases', value: c.criminalCases === 0 ? '✅ None' : `⚠️ ${c.criminalCases}` },
+                      { label: t('party'),       value: c.party },
+                      { label: t('constituency'), value: c.constituency },
+                      { label: t('age'),          value: String(c.age) },
+                      { label: t('education'),    value: c.education },
+                      { label: t('assets'),       value: c.assets },
+                      { label: t('criminalCases'), value: c.criminalCases === 0 ? '✅ None' : `⚠️ ${c.criminalCases}` },
                     ].map(row => (
                       <div key={row.label} className="bg-surface-2 rounded-xl p-3">
                         <p className="text-xs text-muted mb-0.5">{row.label}</p>

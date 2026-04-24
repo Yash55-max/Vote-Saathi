@@ -1,9 +1,11 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, Search, Filter, ChevronRight, X, CheckCircle2 } from 'lucide-react';
+import { useTranslation } from '@/hooks/useTranslation';
+import { useUserStore } from '@/store/userStore';
 
 interface Candidate {
   id: number;
@@ -19,21 +21,44 @@ interface Candidate {
   emoji: string;
 }
 
-const CANDIDATES: Candidate[] = [
-  { id: 1, name: 'G. Kishan Reddy',     party: 'Bharatiya Janata Party',     partyShort: 'BJP',  constituency: 'Secunderabad', age: 61, education: 'Post Graduate',  assets: '₹3.2 Cr',  criminalCases: 0, color: '#FF6B35', emoji: '🏛️' },
-  { id: 2, name: 'Danam Nagender',       party: 'Indian National Congress',    partyShort: 'INC',  constituency: 'Secunderabad', age: 64, education: 'Graduate',        assets: '₹8.7 Cr',  criminalCases: 1, color: '#1570EF', emoji: '✋' },
-  { id: 3, name: 'P. Vinod Kumar Reddy', party: 'Bharat Rashtra Samithi',      partyShort: 'BRS',  constituency: 'Secunderabad', age: 52, education: 'Post Graduate',  assets: '₹12.1 Cr', criminalCases: 0, color: '#E91E8C', emoji: '🌹' },
-  { id: 4, name: 'S. Ramesh',            party: 'Bahujan Samaj Party',         partyShort: 'BSP',  constituency: 'Secunderabad', age: 45, education: 'Graduate',        assets: '₹0.8 Cr',  criminalCases: 0, color: '#6B21A8', emoji: '🐘' },
-  { id: 5, name: 'V. Anand',             party: 'Aam Aadmi Party',             partyShort: 'AAP',  constituency: 'Hyderabad',    age: 38, education: 'Post Graduate',  assets: '₹1.2 Cr',  criminalCases: 0, color: '#0891B2', emoji: '🧹' },
-  { id: 6, name: 'K. Chandrashekar Rao', party: 'Bharat Rashtra Samithi',      partyShort: 'BRS',  constituency: 'Hyderabad',    age: 69, education: 'Graduate',        assets: '₹25.4 Cr', criminalCases: 2, color: '#E91E8C', emoji: '🌹' },
-];
-
 export default function CandidatesPage() {
+  const { t } = useTranslation();
+  const profile = useUserStore(state => state.profile);
   const [search, setSearch] = useState('');
+  const [candidates, setCandidates] = useState<Candidate[]>([]);
+  const [loading, setLoading] = useState(true);
   const [compareList, setCompareList] = useState<Candidate[]>([]);
   const [showCompare, setShowCompare] = useState(false);
 
-  const filtered = CANDIDATES.filter(c =>
+  useEffect(() => {
+    const fetchCandidates = async () => {
+      try {
+        const url = profile?.location?.constituency 
+          ? `http://localhost:8000/api/candidates?constituency=${encodeURIComponent(profile.location.constituency)}`
+          : 'http://localhost:8000/api/candidates';
+        const res = await fetch(url);
+        const data = await res.json();
+        
+        // Map backend schema to frontend Candidate type
+        const mapped = data.map((c: any) => ({
+          ...c,
+          partyShort: c.party_short,
+          criminalCases: c.criminal_cases,
+          // Add UI decorations that aren't in the DB
+          color: c.party_short === 'BJP' ? '#FF6B35' : c.party_short === 'INC' ? '#1570EF' : '#E91E8C',
+          emoji: c.party_short === 'BJP' ? '🏛️' : c.party_short === 'INC' ? '✋' : '🌹'
+        }));
+        setCandidates(mapped);
+      } catch (err) {
+        console.error('Failed to fetch candidates');
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchCandidates();
+  }, [profile?.location?.constituency]);
+
+  const filtered = candidates.filter(c =>
     c.name.toLowerCase().includes(search.toLowerCase()) ||
     c.party.toLowerCase().includes(search.toLowerCase()) ||
     c.constituency.toLowerCase().includes(search.toLowerCase())

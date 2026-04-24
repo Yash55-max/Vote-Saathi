@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { 
@@ -13,20 +13,54 @@ import {
   ChevronRight,
   Globe,
   Settings,
-  HelpCircle
+  HelpCircle,
+  Building2
 } from 'lucide-react';
-
-const MOCK_BOOTHS = [
-  { id: 1, name: 'Govt. Senior Secondary School', address: 'Room No. 4, Ground Floor, Pandara Road, New Delhi 110003', distance: '0.8 km', assigned: true },
-  { id: 2, name: 'NDMC Primary School', address: 'Kaka Nagar, New Delhi 110003', distance: '1.2 km', assigned: false },
-  { id: 3, name: 'Bhavan Vidyalaya', address: 'Kasturba Gandhi Marg, New Delhi 110001', distance: '2.5 km', assigned: false },
-];
+import { useTranslation } from '@/hooks/useTranslation';
+import { useUserStore } from '@/store/userStore';
+import toast from 'react-hot-toast';
 
 export default function ConstituencyPage() {
+  const { t } = useTranslation();
+  const profile = useUserStore(state => state.profile);
   const [locating, setLocating] = useState(false);
-  const [located, setLocated] = useState(true); // Default to true for demo matching screenshot
+  const [constituencyData, setConstituencyData] = useState<any>(null);
+  const [booths, setBooths] = useState<any[]>([]);
 
-  return (
+  const handleLocate = async () => {
+    if (!navigator.geolocation) {
+      toast.error('Geolocation is not supported by your browser');
+      return;
+    }
+
+    setLocating(true);
+    navigator.geolocation.getCurrentPosition(async (position) => {
+      try {
+        const { latitude, longitude } = position.coords;
+        const res = await fetch('http://localhost:8000/api/constituency', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ lat: latitude, lng: longitude })
+        });
+        const data = await res.json();
+        setConstituencyData(data);
+        setBooths(data.booths || []);
+        toast.success('Location identified');
+      } catch (err) {
+        toast.error('Failed to identify location');
+      } finally {
+        setLocating(false);
+      }
+    }, () => {
+      toast.error('Location permission denied');
+      setLocating(false);
+    });
+  };
+
+  useEffect(() => {
+    // If user already has location from profile, we could auto-load, 
+    // but better to let them trigger it for precision.
+  }, []);
     <div className="min-h-screen bg-slate-50 flex flex-col">
       {/* Navbar */}
       <nav className="h-16 bg-white border-b border-slate-100 flex items-center justify-between px-6 sticky top-0 z-50">

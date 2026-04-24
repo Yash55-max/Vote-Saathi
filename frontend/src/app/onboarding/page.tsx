@@ -8,6 +8,11 @@ import {
   User, Globe, MapPin, CheckCircle2,
   ChevronRight, ChevronLeft, HelpCircle
 } from 'lucide-react';
+import { useTranslation } from '@/hooks/useTranslation';
+import { useUserStore } from '@/store/userStore';
+import { doc, setDoc } from 'firebase/firestore';
+import { db, auth } from '@/lib/firebase';
+import toast from 'react-hot-toast';
 
 type Language = 'en' | 'hi' | 'te';
 
@@ -23,9 +28,6 @@ const LANGUAGES: { code: Language; label: string; native: string; icon: string }
   { code: 'hi', label: 'Hindi',    native: 'हिंदी',   icon: 'अ' },
   { code: 'te', label: 'Telugu',   native: 'తెలుగు',  icon: 'అ' },
 ];
-
-import { useTranslation } from '@/hooks/useTranslation';
-import { useUserStore } from '@/store/userStore';
 
 const steps = (t: any) => [
   { id: 1, title: t('onboardingAge'), icon: User, sub: t('ageVerificationSub') },
@@ -57,8 +59,35 @@ export default function OnboardingPage() {
   };
   const back = () => setStep(s => s - 1);
 
+  const setProfileStore = useUserStore((state) => state.setProfile);
+
   const handleComplete = async () => {
-    router.push('/dashboard');
+    const user = auth.currentUser;
+    if (!user) {
+      toast.error('You must be signed in to save your profile');
+      router.push('/login');
+      return;
+    }
+
+    const profileData = {
+      id: user.uid,
+      name: user.displayName || '',
+      email: user.email || '',
+      age: Number(profile.age),
+      language: profile.language,
+      voter_status: profile.firstTimeVoter ? 'first_time' : 'returning',
+      onboardingComplete: true,
+      updatedAt: new Date().toISOString()
+    };
+
+    try {
+      await setDoc(doc(db, 'users', user.uid), profileData, { merge: true });
+      setProfileStore(profileData as any);
+      toast.success('Onboarding complete!');
+      router.push('/dashboard');
+    } catch (err) {
+      toast.error('Failed to save profile');
+    }
   };
 
   const canProceed = () => {

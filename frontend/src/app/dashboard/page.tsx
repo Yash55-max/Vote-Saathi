@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import {
@@ -8,6 +9,7 @@ import {
   FileText, HelpCircle, Send, Search, User, Globe
 } from 'lucide-react';
 import { useTranslation } from '@/hooks/useTranslation';
+import { useUserStore } from '@/store/userStore';
 
 const sidebarLinks = (t: any) => [
   { icon: Home, label: t('home'), href: '/' },
@@ -27,13 +29,55 @@ const actionCards = (t: any) => [
 ];
 
 export default function DashboardPage() {
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
+  const profile = useUserStore(state => state.profile);
   const sidebar = sidebarLinks(t);
   const cards = actionCards(t);
 
+  const [input, setInput] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [messages, setMessages] = useState([
+    { role: 'assistant', content: 'Namaskaram! I am Saathi. I can help you find your polling booth, learn about candidates, or understand the voting process. How can I assist you today?' }
+  ]);
+
+  const handleSendMessage = async () => {
+    if (!input.trim() || loading) return;
+
+    const userMessage = input.trim();
+    setInput('');
+    setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
+    setLoading(true);
+
+    try {
+      const res = await fetch('http://localhost:8000/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: userMessage,
+          context: {
+            language: language,
+            age: profile?.age ? Number(profile.age) : null,
+            location: profile?.location?.constituency || null,
+            first_time_voter: profile?.voter_status === 'first_time'
+          },
+          history: messages.slice(-10).map(m => ({
+            role: m.role === 'assistant' ? 'model' : 'user',
+            content: m.content
+          }))
+        })
+      });
+      const data = await res.json();
+      setMessages(prev => [...prev, { role: 'assistant', content: data.response }]);
+    } catch (err) {
+      setMessages(prev => [...prev, { role: 'assistant', content: "I'm sorry, I encountered an error. Please try again later." }]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-slate-50 flex">
-      {/* Sidebar */}
+      {/* ... Sidebar remains same ... */}
       <aside className="w-64 bg-white border-r border-slate-100 flex flex-col sticky top-0 h-screen">
         <div className="p-6">
           <span className="font-heading font-extrabold text-lg text-primary flex items-center gap-2">
@@ -86,7 +130,7 @@ export default function DashboardPage() {
               <button className="p-2 text-slate-400 hover:text-primary transition-colors"><Search size={20} /></button>
               <button className="p-2 text-slate-400 hover:text-primary transition-colors"><Globe size={20} /></button>
               <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 font-bold text-xs border border-slate-200">
-                AS
+                {profile?.name?.substring(0, 2).toUpperCase() || 'AS'}
               </div>
            </div>
         </header>
@@ -113,42 +157,54 @@ export default function DashboardPage() {
 
                  {/* Chat Messages */}
                  <div className="flex-1 p-6 overflow-y-auto space-y-6 bg-slate-50/30">
-                    <div className="flex items-start gap-3">
-                       <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-[10px] font-bold flex-shrink-0">
-                         S
-                       </div>
-                       <div className="bg-white p-4 rounded-2xl rounded-tl-none border border-slate-100 shadow-sm max-w-[80%] text-sm text-slate-600 leading-relaxed">
-                         Namaskaram! I am Saathi. I can help you find your polling booth, learn about candidates, or understand the voting process. How can I assist you today?
-                       </div>
-                    </div>
-
-                    <div className="flex items-start gap-3 justify-end">
-                       <div className="bg-primary p-4 rounded-2xl rounded-tr-none shadow-md max-w-[80%] text-sm text-white font-medium leading-relaxed">
-                         What documents do I need to carry to vote?
-                       </div>
-                       <div className="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center text-slate-400 text-[10px] font-bold flex-shrink-0 border border-slate-300">
-                         AS
-                       </div>
-                    </div>
-
-                    <div className="flex items-start gap-3">
-                       <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-[10px] font-bold flex-shrink-0">
-                         S
-                       </div>
-                       <div className="bg-white p-4 rounded-2xl rounded-tl-none border border-slate-100 shadow-sm max-w-[80%] text-sm text-slate-600 leading-relaxed">
-                         You must carry your EPIC (Voter ID card). If you don't have it, you can bring an approved alternative like an Aadhaar Card or Passport.
-                       </div>
-                    </div>
+                    {messages.map((m, idx) => (
+                      <div key={idx} className={`flex items-start gap-3 ${m.role === 'user' ? 'justify-end' : ''}`}>
+                         {m.role === 'assistant' && (
+                           <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-[10px] font-bold flex-shrink-0">
+                             S
+                           </div>
+                         )}
+                         <div className={`p-4 rounded-2xl shadow-sm max-w-[80%] text-sm leading-relaxed ${
+                           m.role === 'assistant' 
+                             ? 'bg-white rounded-tl-none border border-slate-100 text-slate-600' 
+                             : 'bg-primary rounded-tr-none text-white font-medium'
+                         }`}>
+                           {m.content}
+                         </div>
+                         {m.role === 'user' && (
+                           <div className="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center text-slate-400 text-[10px] font-bold flex-shrink-0 border border-slate-300">
+                             {profile?.name?.substring(0, 2).toUpperCase() || 'U'}
+                           </div>
+                         )}
+                      </div>
+                    ))}
+                    {loading && (
+                      <div className="flex items-start gap-3">
+                        <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-[10px] font-bold flex-shrink-0">
+                          S
+                        </div>
+                        <div className="bg-white p-4 rounded-2xl rounded-tl-none border border-slate-100 shadow-sm text-slate-400 text-xs italic">
+                          Saathi is thinking...
+                        </div>
+                      </div>
+                    )}
                  </div>
 
                  {/* Chat Input */}
                  <div className="p-4 bg-white border-t border-slate-50 flex items-center gap-3">
                     <input 
                       type="text" 
+                      value={input}
+                      onChange={e => setInput(e.target.value)}
+                      onKeyDown={e => e.key === 'Enter' && handleSendMessage()}
                       placeholder={t('chatPlaceholder')}
                       className="flex-1 bg-slate-50 px-4 py-3 rounded-xl text-sm border border-slate-100 focus:outline-none focus:border-primary/30 transition-colors"
                     />
-                    <button className="p-3 bg-primary text-white rounded-xl shadow-lg shadow-primary/20 hover:bg-primary-700 transition-all">
+                    <button 
+                      onClick={handleSendMessage}
+                      disabled={loading || !input.trim()}
+                      className="p-3 bg-primary text-white rounded-xl shadow-lg shadow-primary/20 hover:bg-primary-700 transition-all disabled:opacity-50"
+                    >
                        <Send size={18} />
                     </button>
                  </div>

@@ -2,10 +2,20 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Eye, EyeOff, Mail, Lock, User, ArrowRight, Chrome } from 'lucide-react';
+import { 
+  createUserWithEmailAndPassword, 
+  updateProfile,
+  signInWithPopup,
+  GoogleAuthProvider
+} from 'firebase/auth';
+import { auth } from '@/lib/firebase';
+import toast from 'react-hot-toast';
 
 export default function RegisterPage() {
+  const router = useRouter();
   const [showPass, setShowPass] = useState(false);
   const [loading, setLoading]   = useState(false);
   const [form, setForm] = useState({ name: '', email: '', password: '' });
@@ -16,8 +26,27 @@ export default function RegisterPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    // TODO: Firebase createUserWithEmailAndPassword
-    setTimeout(() => setLoading(false), 1500);
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, form.email, form.password);
+      await updateProfile(userCredential.user, { displayName: form.name });
+      toast.success('Account created successfully');
+      router.push('/dashboard');
+    } catch (err: any) {
+      toast.error(err.message || 'Failed to create account');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGoogle = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      await signInWithPopup(auth, provider);
+      toast.success('Signed in with Google');
+      router.push('/dashboard');
+    } catch (err: any) {
+      toast.error(err.message || 'Google sign-in failed');
+    }
   };
 
   return (
@@ -38,7 +67,10 @@ export default function RegisterPage() {
           </div>
 
           {/* Google SSO */}
-          <button className="w-full flex items-center justify-center gap-3 py-3 px-4 glass rounded-xl border border-white/10 hover:border-primary/40 transition-all hover:bg-surface-2 font-medium mb-6">
+          <button 
+            onClick={handleGoogle}
+            className="w-full flex items-center justify-center gap-3 py-3 px-4 glass rounded-xl border border-white/10 hover:border-primary/40 transition-all hover:bg-surface-2 font-medium mb-6"
+          >
             <Chrome size={18} className="text-primary" />
             Sign up with Google
           </button>

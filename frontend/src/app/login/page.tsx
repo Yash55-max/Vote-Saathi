@@ -2,10 +2,19 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Eye, EyeOff, Mail, Lock, ArrowRight, Chrome } from 'lucide-react';
+import { 
+  signInWithEmailAndPassword, 
+  signInWithPopup, 
+  GoogleAuthProvider 
+} from 'firebase/auth';
+import { auth } from '@/lib/firebase';
+import toast from 'react-hot-toast';
 
 export default function LoginPage() {
+  const router = useRouter();
   const [showPass, setShowPass] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -14,12 +23,26 @@ export default function LoginPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    // TODO: Firebase signInWithEmailAndPassword
-    setTimeout(() => setLoading(false), 1500);
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      toast.success('Signed in successfully');
+      router.push('/dashboard');
+    } catch (err: any) {
+      toast.error(err.message || 'Failed to sign in');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleGoogle = async () => {
-    // TODO: Firebase signInWithPopup(GoogleAuthProvider)
+    const provider = new GoogleAuthProvider();
+    try {
+      await signInWithPopup(auth, provider);
+      toast.success('Signed in with Google');
+      router.push('/dashboard');
+    } catch (err: any) {
+      toast.error(err.message || 'Google sign-in failed');
+    }
   };
 
   return (

@@ -46,3 +46,10 @@ logs/
 # Build
 dist/
 build/
+
+# Temporary Setup Scripts
+fix_screenshots.py
+setup_screenshots.py
+RUN_ME_TO_FIX_IMAGES.bat
+commit_changes.bat
+*.tmp

@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter
 from schemas import CandidateResponse
 from cache import TTLCache
 import logging

@@ -15,10 +15,14 @@ const firebaseConfig = {
 };
 
 // Prevent duplicate app initialization in dev hot-reload
-const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+// Only initialize if we have an API key to prevent build-time crashes in CI
+const app = (getApps().length === 0 && firebaseConfig.apiKey) 
+  ? initializeApp(firebaseConfig) 
+  : (getApps()[0] || null);
 
-export const auth = getAuth(app);
-export const db   = getFirestore(app);
+// Provide safe fallbacks if app initialization is skipped (e.g. during CI build)
+export const auth = app ? getAuth(app) : {} as any;
+export const db   = app ? getFirestore(app) : {} as any;
 
 // FCM is browser-only
 export const getMessagingInstance = async () => {

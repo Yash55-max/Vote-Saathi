@@ -109,61 +109,84 @@ export default function CandidatesPage() {
 
         {/* Candidate cards */}
         <div className="space-y-3">
-          {filtered.map((c, i) => (
-            <motion.div
-              key={c.id}
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.05 }}
-              className={`glass rounded-2xl p-5 border transition-all ${
-                isSelected(c) ? 'border-primary/60 bg-primary/5' : 'border-white/10 hover:border-white/20'
-              }`}
-            >
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl flex-shrink-0"
-                  style={{ backgroundColor: `${c.color}20` }}>
-                  {c.emoji}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <h3 className="font-semibold">{c.name}</h3>
-                  <div className="flex items-center gap-2 mt-1">
-                    <span className="text-xs px-2 py-0.5 rounded-full font-medium"
-                      style={{ backgroundColor: `${c.color}20`, color: c.color }}>
-                      {c.partyShort}
-                    </span>
-                    <span className="text-xs text-muted">{c.constituency}</span>
-                  </div>
-                  <div className="grid grid-cols-3 gap-2 mt-3">
-                    <div className="text-center">
-                      <p className="text-xs text-muted">{t('age')}</p>
-                      <p className="text-sm font-medium">{c.age}</p>
-                    </div>
-                    <div className="text-center">
-                      <p className="text-xs text-muted">{t('assets')}</p>
-                      <p className="text-sm font-medium">{c.assets}</p>
-                    </div>
-                    <div className="text-center">
-                      <p className="text-xs text-muted">{t('criminalCases')}</p>
-                      <p className={`text-sm font-medium ${c.criminalCases > 0 ? 'text-error' : 'text-success'}`}>
-                        {c.criminalCases === 0 ? '✓ None' : c.criminalCases}
-                      </p>
+          {loading ? (
+            Array.from({ length: 4 }).map((_, i) => (
+              <div key={i} className="glass rounded-2xl p-5 border border-white/5 animate-pulse">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-2xl bg-white/10 flex-shrink-0" />
+                  <div className="flex-1 space-y-2">
+                    <div className="h-4 bg-white/10 rounded w-1/3" />
+                    <div className="h-3 bg-white/5 rounded w-1/4" />
+                    <div className="grid grid-cols-3 gap-2 mt-4">
+                      <div className="h-10 bg-white/5 rounded-xl" />
+                      <div className="h-10 bg-white/5 rounded-xl" />
+                      <div className="h-10 bg-white/5 rounded-xl" />
                     </div>
                   </div>
                 </div>
-                <button
-                  onClick={() => toggleCompare(c)}
-                  disabled={!isSelected(c) && compareList.length >= 2}
-                  className={`flex-shrink-0 w-8 h-8 rounded-lg border flex items-center justify-center transition-all ${
-                    isSelected(c)
-                      ? 'bg-primary border-primary text-white'
-                      : 'border-white/20 text-muted hover:border-primary/50 disabled:opacity-30'
-                  }`}
-                >
-                  {isSelected(c) ? <CheckCircle2 size={16} /> : <Filter size={14} />}
-                </button>
               </div>
-            </motion.div>
-          ))}
+            ))
+          ) : filtered.length === 0 ? (
+            <div className="text-center py-12">
+              <p className="text-muted">{t('noCandidatesFound')}</p>
+            </div>
+          ) : (
+            filtered.map((c, i) => (
+              <motion.div
+                key={c.id}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.05 }}
+                className={`glass rounded-2xl p-5 border transition-all ${
+                  isSelected(c) ? 'border-primary/60 bg-primary/5' : 'border-white/10 hover:border-white/20'
+                }`}
+              >
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl flex-shrink-0"
+                    style={{ backgroundColor: `${c.color}20` }}>
+                    {c.emoji}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-semibold">{c.name}</h3>
+                    <div className="flex items-center gap-2 mt-1">
+                      <span className="text-xs px-2 py-0.5 rounded-full font-medium"
+                        style={{ backgroundColor: `${c.color}20`, color: c.color }}>
+                        {c.partyShort}
+                      </span>
+                      <span className="text-xs text-muted">{c.constituency}</span>
+                    </div>
+                    <div className="grid grid-cols-3 gap-2 mt-3">
+                      <div className="text-center">
+                        <p className="text-xs text-muted">{t('age')}</p>
+                        <p className="text-sm font-medium">{c.age}</p>
+                      </div>
+                      <div className="text-center">
+                        <p className="text-xs text-muted">{t('assets')}</p>
+                        <p className="text-sm font-medium">{c.assets}</p>
+                      </div>
+                      <div className="text-center">
+                        <p className="text-xs text-muted">{t('criminalCases')}</p>
+                        <p className={`text-sm font-medium ${c.criminalCases > 0 ? 'text-error' : 'text-success'}`}>
+                          {c.criminalCases === 0 ? '✓ None' : c.criminalCases}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => toggleCompare(c)}
+                    disabled={!isSelected(c) && compareList.length >= 2}
+                    className={`flex-shrink-0 w-8 h-8 rounded-lg border flex items-center justify-center transition-all ${
+                      isSelected(c)
+                        ? 'bg-primary border-primary text-white'
+                        : 'border-white/20 text-muted hover:border-primary/50 disabled:opacity-30'
+                    }`}
+                  >
+                    {isSelected(c) ? <CheckCircle2 size={16} /> : <Filter size={14} />}
+                  </button>
+                </div>
+              </motion.div>
+            ))
+          )}
         </div>
       </div>
 

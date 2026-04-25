@@ -1,3 +1,4 @@
+from typing import Annotated
 from fastapi import APIRouter, HTTPException, Depends
 from schemas import ChatRequest, ChatResponse
 import gemini_service
@@ -9,7 +10,10 @@ router = APIRouter(prefix="/api/chat", tags=["Chat"])
 log = logging.getLogger("votesaathi")
 
 @router.post("", response_model=ChatResponse)
-async def chat(body: ChatRequest, settings: Settings = Depends(get_settings)):
+async def chat(
+    body: ChatRequest, 
+    settings: Annotated[Settings, Depends(get_settings)]
+):
     """
     Send a message to the VoteSaathi AI assistant.
     """

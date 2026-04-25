@@ -1,3 +1,4 @@
+from typing import Annotated
 from fastapi import APIRouter, HTTPException, Depends
 from schemas import ConstituencyRequest, ConstituencyResponse, PollingBooth
 import maps_service
@@ -8,7 +9,10 @@ router = APIRouter(prefix="/api/constituency", tags=["Location"])
 log = logging.getLogger("votesaathi")
 
 @router.post("", response_model=ConstituencyResponse)
-async def get_constituency(body: ConstituencyRequest, settings: Settings = Depends(get_settings)):
+async def get_constituency(
+    body: ConstituencyRequest, 
+    settings: Annotated[Settings, Depends(get_settings)]
+):
     """
     Reverse geocode lat/lng → constituency + nearest polling booths.
     """

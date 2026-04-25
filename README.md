@@ -28,10 +28,11 @@ The project follows a **"Context-First"** architecture:
 
 ### 🛠️ How the Solution Works
 1. **User Profiling**: Users authenticate via Firebase and provide minimal demographic data.
-2. **AI Interaction**: Queries sent to the **Ask Saathi** assistant are processed by a FastAPI backend. We use **Google Gemini** with a specialized System Instruction that restricts it to authoritative ECI sources.
-3. **BigQuery Analytics**: All interactions are logged anonymized to **Google BigQuery**, enabling real-time civic participation analytics while maintaining user privacy.
-4. **Cloud Infrastructure**: The backend integrates **Google Cloud Logging** for enterprise-grade observability and is structured for scalability using modular routers.
-5. **Accessibility Engine**: A custom-built engine intercepts the DOM to apply real-time accessibility transformations (Dyslexia fonts, contrast shifts) without page reloads.
+2. **AI Interaction**: Queries sent to the **Ask Saathi** assistant are processed by a FastAPI backend using modern **Dependency Injection (Annotated)** patterns for high maintainability.
+3. **Modular Frontend**: The React application follows a **Domain-Driven Design**, with landing page sections decoupled into reusable atoms/molecules to prevent "God Files" and ensure code quality.
+4. **BigQuery Analytics**: All interactions are logged anonymized to **Google BigQuery**, enabling real-time civic participation analytics while maintaining user privacy.
+5. **Cloud Infrastructure**: The backend integrates **Google Cloud Logging** for enterprise-grade observability and is structured for scalability using modular routers.
+6. **Accessibility Engine**: A custom-built engine intercepts the DOM to apply real-time accessibility transformations (Dyslexia fonts, contrast shifts) without page reloads.
 
 ### 📝 Assumptions Made
 - **GCP Environment**: Assumes the backend is running in an environment with access to Google Cloud project credentials for Logging and BigQuery.

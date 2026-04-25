@@ -46,6 +46,34 @@ logs/
 # Build
 dist/
 build/
+*.tsbuildinfo
+
+# Coverage
+frontend/coverage/
+backend/coverage.xml
+.coverage
+htmlcov/
+
+# Temporary Setup Scripts
+fix_screenshots.py
+setup_screenshots.py
+RUN_ME_TO_FIX_IMAGES.bat
+commit_changes.bat
+*.tmp
+*.tsbuildinfo
+
+# Coverage
+frontend/coverage/
+backend/coverage.xml
+.coverage
+htmlcov/
+
+# Temporary Setup Scripts
+fix_screenshots.py
+setup_screenshots.py
+RUN_ME_TO_FIX_IMAGES.bat
+commit_changes.bat
+*.tmp
 
 # Temporary Setup Scripts
 fix_screenshots.py

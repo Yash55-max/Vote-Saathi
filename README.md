@@ -1,13 +1,22 @@
 # 🗳️ VoteSaathi: Your Digital Election Companion
 
 [![CI](https://github.com/Yash55-max/Vote-Saathi/actions/workflows/ci.yml/badge.svg)](https://github.com/Yash55-max/Vote-Saathi/actions/workflows/ci.yml)
+
 [![Backend Lint](https://img.shields.io/badge/Backend%20Lint-Ruff-2ea44f?style=for-the-badge&logo=python&logoColor=white)](.github/workflows/ci.yml)
+
 [![Coverage](https://codecov.io/gh/Yash55-max/Vote-Saathi/branch/main/graph/badge.svg)](https://codecov.io/gh/Yash55-max/Vote-Saathi)
+
 [![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.109-009688?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
+
 [![Firebase](https://img.shields.io/badge/Firebase-Auth%20%26%20Firestore-FFCA28?style=for-the-badge&logo=firebase)](https://firebase.google.com/)
+
 [![Google Gemini](https://img.shields.io/badge/Google%20Gemini-AI%20Assistant-4285F4?style=for-the-badge&logo=google-gemini)](https://ai.google.dev/)
+
+
 [![Google Maps](https://img.shields.io/badge/Google%20Maps-Geospatial-4285F4?style=for-the-badge&logo=google-maps)](https://mapsplatform.google.com/)
+
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
 
 **VoteSaathi** is a context-aware, accessible digital public utility designed to empower Indian citizens through the democratic process. It provides personalized election guidance, multi-language AI assistance, and real-time polling booth navigation to ensure no voter is left behind.

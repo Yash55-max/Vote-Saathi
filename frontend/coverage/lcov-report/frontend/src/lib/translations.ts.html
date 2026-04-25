@@ -1,0 +1,883 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Code coverage report for frontend/src/lib/translations.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../../favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+    
+<body>
+<div class='wrapper'>
+    <div class='pad1'>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">frontend/src/lib</a> translations.ts</h1>
+        <div class='clearfix'>
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">0% </span>
+                <span class="quiet">Statements</span>
+                <span class='fraction'>0/222</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>1/1</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Functions</span>
+                <span class='fraction'>1/1</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">0% </span>
+                <span class="quiet">Lines</span>
+                <span class='fraction'>0/222</span>
+            </div>
+        
+            
+        </div>
+        <p class="quiet">
+            Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
+        </p>
+        <template id="filterTemplate">
+            <div class="quiet">
+                Filter:
+                <input type="search" id="fileSearch">
+            </div>
+        </template>
+    </div>
+    <div class='status-line low'></div>
+    <pre><table class="coverage">
+<tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
+<a name='L2'></a><a href='#L2'>2</a>
+<a name='L3'></a><a href='#L3'>3</a>
+<a name='L4'></a><a href='#L4'>4</a>
+<a name='L5'></a><a href='#L5'>5</a>
+<a name='L6'></a><a href='#L6'>6</a>
+<a name='L7'></a><a href='#L7'>7</a>
+<a name='L8'></a><a href='#L8'>8</a>
+<a name='L9'></a><a href='#L9'>9</a>
+<a name='L10'></a><a href='#L10'>10</a>
+<a name='L11'></a><a href='#L11'>11</a>
+<a name='L12'></a><a href='#L12'>12</a>
+<a name='L13'></a><a href='#L13'>13</a>
+<a name='L14'></a><a href='#L14'>14</a>
+<a name='L15'></a><a href='#L15'>15</a>
+<a name='L16'></a><a href='#L16'>16</a>
+<a name='L17'></a><a href='#L17'>17</a>
+<a name='L18'></a><a href='#L18'>18</a>
+<a name='L19'></a><a href='#L19'>19</a>
+<a name='L20'></a><a href='#L20'>20</a>
+<a name='L21'></a><a href='#L21'>21</a>
+<a name='L22'></a><a href='#L22'>22</a>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a>
+<a name='L37'></a><a href='#L37'>37</a>
+<a name='L38'></a><a href='#L38'>38</a>
+<a name='L39'></a><a href='#L39'>39</a>
+<a name='L40'></a><a href='#L40'>40</a>
+<a name='L41'></a><a href='#L41'>41</a>
+<a name='L42'></a><a href='#L42'>42</a>
+<a name='L43'></a><a href='#L43'>43</a>
+<a name='L44'></a><a href='#L44'>44</a>
+<a name='L45'></a><a href='#L45'>45</a>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a>
+<a name='L81'></a><a href='#L81'>81</a>
+<a name='L82'></a><a href='#L82'>82</a>
+<a name='L83'></a><a href='#L83'>83</a>
+<a name='L84'></a><a href='#L84'>84</a>
+<a name='L85'></a><a href='#L85'>85</a>
+<a name='L86'></a><a href='#L86'>86</a>
+<a name='L87'></a><a href='#L87'>87</a>
+<a name='L88'></a><a href='#L88'>88</a>
+<a name='L89'></a><a href='#L89'>89</a>
+<a name='L90'></a><a href='#L90'>90</a>
+<a name='L91'></a><a href='#L91'>91</a>
+<a name='L92'></a><a href='#L92'>92</a>
+<a name='L93'></a><a href='#L93'>93</a>
+<a name='L94'></a><a href='#L94'>94</a>
+<a name='L95'></a><a href='#L95'>95</a>
+<a name='L96'></a><a href='#L96'>96</a>
+<a name='L97'></a><a href='#L97'>97</a>
+<a name='L98'></a><a href='#L98'>98</a>
+<a name='L99'></a><a href='#L99'>99</a>
+<a name='L100'></a><a href='#L100'>100</a>
+<a name='L101'></a><a href='#L101'>101</a>
+<a name='L102'></a><a href='#L102'>102</a>
+<a name='L103'></a><a href='#L103'>103</a>
+<a name='L104'></a><a href='#L104'>104</a>
+<a name='L105'></a><a href='#L105'>105</a>
+<a name='L106'></a><a href='#L106'>106</a>
+<a name='L107'></a><a href='#L107'>107</a>
+<a name='L108'></a><a href='#L108'>108</a>
+<a name='L109'></a><a href='#L109'>109</a>
+<a name='L110'></a><a href='#L110'>110</a>
+<a name='L111'></a><a href='#L111'>111</a>
+<a name='L112'></a><a href='#L112'>112</a>
+<a name='L113'></a><a href='#L113'>113</a>
+<a name='L114'></a><a href='#L114'>114</a>
+<a name='L115'></a><a href='#L115'>115</a>
+<a name='L116'></a><a href='#L116'>116</a>
+<a name='L117'></a><a href='#L117'>117</a>
+<a name='L118'></a><a href='#L118'>118</a>
+<a name='L119'></a><a href='#L119'>119</a>
+<a name='L120'></a><a href='#L120'>120</a>
+<a name='L121'></a><a href='#L121'>121</a>
+<a name='L122'></a><a href='#L122'>122</a>
+<a name='L123'></a><a href='#L123'>123</a>
+<a name='L124'></a><a href='#L124'>124</a>
+<a name='L125'></a><a href='#L125'>125</a>
+<a name='L126'></a><a href='#L126'>126</a>
+<a name='L127'></a><a href='#L127'>127</a>
+<a name='L128'></a><a href='#L128'>128</a>
+<a name='L129'></a><a href='#L129'>129</a>
+<a name='L130'></a><a href='#L130'>130</a>
+<a name='L131'></a><a href='#L131'>131</a>
+<a name='L132'></a><a href='#L132'>132</a>
+<a name='L133'></a><a href='#L133'>133</a>
+<a name='L134'></a><a href='#L134'>134</a>
+<a name='L135'></a><a href='#L135'>135</a>
+<a name='L136'></a><a href='#L136'>136</a>
+<a name='L137'></a><a href='#L137'>137</a>
+<a name='L138'></a><a href='#L138'>138</a>
+<a name='L139'></a><a href='#L139'>139</a>
+<a name='L140'></a><a href='#L140'>140</a>
+<a name='L141'></a><a href='#L141'>141</a>
+<a name='L142'></a><a href='#L142'>142</a>
+<a name='L143'></a><a href='#L143'>143</a>
+<a name='L144'></a><a href='#L144'>144</a>
+<a name='L145'></a><a href='#L145'>145</a>
+<a name='L146'></a><a href='#L146'>146</a>
+<a name='L147'></a><a href='#L147'>147</a>
+<a name='L148'></a><a href='#L148'>148</a>
+<a name='L149'></a><a href='#L149'>149</a>
+<a name='L150'></a><a href='#L150'>150</a>
+<a name='L151'></a><a href='#L151'>151</a>
+<a name='L152'></a><a href='#L152'>152</a>
+<a name='L153'></a><a href='#L153'>153</a>
+<a name='L154'></a><a href='#L154'>154</a>
+<a name='L155'></a><a href='#L155'>155</a>
+<a name='L156'></a><a href='#L156'>156</a>
+<a name='L157'></a><a href='#L157'>157</a>
+<a name='L158'></a><a href='#L158'>158</a>
+<a name='L159'></a><a href='#L159'>159</a>
+<a name='L160'></a><a href='#L160'>160</a>
+<a name='L161'></a><a href='#L161'>161</a>
+<a name='L162'></a><a href='#L162'>162</a>
+<a name='L163'></a><a href='#L163'>163</a>
+<a name='L164'></a><a href='#L164'>164</a>
+<a name='L165'></a><a href='#L165'>165</a>
+<a name='L166'></a><a href='#L166'>166</a>
+<a name='L167'></a><a href='#L167'>167</a>
+<a name='L168'></a><a href='#L168'>168</a>
+<a name='L169'></a><a href='#L169'>169</a>
+<a name='L170'></a><a href='#L170'>170</a>
+<a name='L171'></a><a href='#L171'>171</a>
+<a name='L172'></a><a href='#L172'>172</a>
+<a name='L173'></a><a href='#L173'>173</a>
+<a name='L174'></a><a href='#L174'>174</a>
+<a name='L175'></a><a href='#L175'>175</a>
+<a name='L176'></a><a href='#L176'>176</a>
+<a name='L177'></a><a href='#L177'>177</a>
+<a name='L178'></a><a href='#L178'>178</a>
+<a name='L179'></a><a href='#L179'>179</a>
+<a name='L180'></a><a href='#L180'>180</a>
+<a name='L181'></a><a href='#L181'>181</a>
+<a name='L182'></a><a href='#L182'>182</a>
+<a name='L183'></a><a href='#L183'>183</a>
+<a name='L184'></a><a href='#L184'>184</a>
+<a name='L185'></a><a href='#L185'>185</a>
+<a name='L186'></a><a href='#L186'>186</a>
+<a name='L187'></a><a href='#L187'>187</a>
+<a name='L188'></a><a href='#L188'>188</a>
+<a name='L189'></a><a href='#L189'>189</a>
+<a name='L190'></a><a href='#L190'>190</a>
+<a name='L191'></a><a href='#L191'>191</a>
+<a name='L192'></a><a href='#L192'>192</a>
+<a name='L193'></a><a href='#L193'>193</a>
+<a name='L194'></a><a href='#L194'>194</a>
+<a name='L195'></a><a href='#L195'>195</a>
+<a name='L196'></a><a href='#L196'>196</a>
+<a name='L197'></a><a href='#L197'>197</a>
+<a name='L198'></a><a href='#L198'>198</a>
+<a name='L199'></a><a href='#L199'>199</a>
+<a name='L200'></a><a href='#L200'>200</a>
+<a name='L201'></a><a href='#L201'>201</a>
+<a name='L202'></a><a href='#L202'>202</a>
+<a name='L203'></a><a href='#L203'>203</a>
+<a name='L204'></a><a href='#L204'>204</a>
+<a name='L205'></a><a href='#L205'>205</a>
+<a name='L206'></a><a href='#L206'>206</a>
+<a name='L207'></a><a href='#L207'>207</a>
+<a name='L208'></a><a href='#L208'>208</a>
+<a name='L209'></a><a href='#L209'>209</a>
+<a name='L210'></a><a href='#L210'>210</a>
+<a name='L211'></a><a href='#L211'>211</a>
+<a name='L212'></a><a href='#L212'>212</a>
+<a name='L213'></a><a href='#L213'>213</a>
+<a name='L214'></a><a href='#L214'>214</a>
+<a name='L215'></a><a href='#L215'>215</a>
+<a name='L216'></a><a href='#L216'>216</a>
+<a name='L217'></a><a href='#L217'>217</a>
+<a name='L218'></a><a href='#L218'>218</a>
+<a name='L219'></a><a href='#L219'>219</a>
+<a name='L220'></a><a href='#L220'>220</a>
+<a name='L221'></a><a href='#L221'>221</a>
+<a name='L222'></a><a href='#L222'>222</a>
+<a name='L223'></a><a href='#L223'>223</a>
+<a name='L224'></a><a href='#L224'>224</a>
+<a name='L225'></a><a href='#L225'>225</a>
+<a name='L226'></a><a href='#L226'>226</a>
+<a name='L227'></a><a href='#L227'>227</a>
+<a name='L228'></a><a href='#L228'>228</a>
+<a name='L229'></a><a href='#L229'>229</a>
+<a name='L230'></a><a href='#L230'>230</a>
+<a name='L231'></a><a href='#L231'>231</a>
+<a name='L232'></a><a href='#L232'>232</a>
+<a name='L233'></a><a href='#L233'>233</a>
+<a name='L234'></a><a href='#L234'>234</a>
+<a name='L235'></a><a href='#L235'>235</a>
+<a name='L236'></a><a href='#L236'>236</a>
+<a name='L237'></a><a href='#L237'>237</a>
+<a name='L238'></a><a href='#L238'>238</a>
+<a name='L239'></a><a href='#L239'>239</a>
+<a name='L240'></a><a href='#L240'>240</a>
+<a name='L241'></a><a href='#L241'>241</a>
+<a name='L242'></a><a href='#L242'>242</a>
+<a name='L243'></a><a href='#L243'>243</a>
+<a name='L244'></a><a href='#L244'>244</a>
+<a name='L245'></a><a href='#L245'>245</a>
+<a name='L246'></a><a href='#L246'>246</a>
+<a name='L247'></a><a href='#L247'>247</a>
+<a name='L248'></a><a href='#L248'>248</a>
+<a name='L249'></a><a href='#L249'>249</a>
+<a name='L250'></a><a href='#L250'>250</a>
+<a name='L251'></a><a href='#L251'>251</a>
+<a name='L252'></a><a href='#L252'>252</a>
+<a name='L253'></a><a href='#L253'>253</a>
+<a name='L254'></a><a href='#L254'>254</a>
+<a name='L255'></a><a href='#L255'>255</a>
+<a name='L256'></a><a href='#L256'>256</a>
+<a name='L257'></a><a href='#L257'>257</a>
+<a name='L258'></a><a href='#L258'>258</a>
+<a name='L259'></a><a href='#L259'>259</a>
+<a name='L260'></a><a href='#L260'>260</a>
+<a name='L261'></a><a href='#L261'>261</a>
+<a name='L262'></a><a href='#L262'>262</a>
+<a name='L263'></a><a href='#L263'>263</a>
+<a name='L264'></a><a href='#L264'>264</a>
+<a name='L265'></a><a href='#L265'>265</a>
+<a name='L266'></a><a href='#L266'>266</a>
+<a name='L267'></a><a href='#L267'>267</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Language } from '@/types';
+&nbsp;
+<span class="cstat-no" title="statement not covered" >const enBase = {</span>
+    // Nav
+<span class="cstat-no" title="statement not covered" >    home: 'Home',</span>
+<span class="cstat-no" title="statement not covered" >    dashboard: 'Dashboard',</span>
+<span class="cstat-no" title="statement not covered" >    guide: 'Guide',</span>
+<span class="cstat-no" title="statement not covered" >    candidates: 'Candidates',</span>
+<span class="cstat-no" title="statement not covered" >    signIn: 'Sign In',</span>
+<span class="cstat-no" title="statement not covered" >    getStarted: 'Get Started',</span>
+&nbsp;
+    // Hero
+<span class="cstat-no" title="statement not covered" >    heroTitle: 'Empowering Every Indian to Vote.',</span>
+<span class="cstat-no" title="statement not covered" >    heroSubtitle: 'Welcome to the official, accessible portal for voter guidance. Find your polling booth, know your candidates, and exercise your democratic right with complete information.',</span>
+<span class="cstat-no" title="statement not covered" >    startGuidance: 'Start Guidance',</span>
+<span class="cstat-no" title="statement not covered" >    digitalUtility: 'Digital Public Utility',</span>
+&nbsp;
+    // Accessibility Section
+<span class="cstat-no" title="statement not covered" >    accessibilityHeading: 'Designed for Democratic Accessibility',</span>
+<span class="cstat-no" title="statement not covered" >    accessibilitySub: 'Our platform adapts to your needs, ensuring every citizen has equal access to critical voting information.',</span>
+<span class="cstat-no" title="statement not covered" >    multilingual: 'Multilingual Support',</span>
+<span class="cstat-no" title="statement not covered" >    multilingualDesc: 'Access information in multiple regional languages to ensure complete comprehension of your voting rights.',</span>
+<span class="cstat-no" title="statement not covered" >    screenReader: 'Screen Reader Optimized',</span>
+<span class="cstat-no" title="statement not covered" >    screenReaderDesc: 'Fully structured content and descriptive labels ensure seamless navigation for visually impaired users.',</span>
+<span class="cstat-no" title="statement not covered" >    highContrast: 'High Contrast Modes',</span>
+<span class="cstat-no" title="statement not covered" >    highContrastDesc: 'Toggle specialized visual modes including high contrast and dyslexia-friendly typography for easier reading.',</span>
+&nbsp;
+    // Dashboard
+<span class="cstat-no" title="statement not covered" >    goodMorning: 'Good morning',</span>
+<span class="cstat-no" title="statement not covered" >    askSaathi: 'Ask Saathi',</span>
+<span class="cstat-no" title="statement not covered" >    saathiSub: 'Your digital election assistant',</span>
+<span class="cstat-no" title="statement not covered" >    chatPlaceholder: 'Ask about voting, booths, candidates...',</span>
+<span class="cstat-no" title="statement not covered" >    checkStatus: 'Check Voter Status',</span>
+&nbsp;
+    // Onboarding
+<span class="cstat-no" title="statement not covered" >    onboardingAge: 'Age Verification',</span>
+<span class="cstat-no" title="statement not covered" >    onboardingLang: 'Select Language',</span>
+<span class="cstat-no" title="statement not covered" >    onboardingLoc: 'Location',</span>
+<span class="cstat-no" title="statement not covered" >    onboardingVoter: 'Voter Status',</span>
+<span class="cstat-no" title="statement not covered" >    ageVerificationSub: 'Please enter your age to verify your eligibility for the election guidance.',</span>
+<span class="cstat-no" title="statement not covered" >    selectLangSub: 'Choose the language you prefer for navigating the voting platform.',</span>
+<span class="cstat-no" title="statement not covered" >    locationSub: 'We use your location to identify your constituency and show you nearby polling booths.',</span>
+<span class="cstat-no" title="statement not covered" >    voterStatusSub: 'Help us customize your guide based on your experience.',</span>
+&nbsp;
+    // General
+<span class="cstat-no" title="statement not covered" >    back: 'Back',</span>
+<span class="cstat-no" title="statement not covered" >    continue: 'Continue',</span>
+<span class="cstat-no" title="statement not covered" >    footerText: '© 2026 ELECTION COMMISSION OF INDIA. DESIGNED FOR DEMOCRATIC ACCESSIBILITY.',</span>
+<span class="cstat-no" title="statement not covered" >    yourBooth: 'Your Booth',</span>
+<span class="cstat-no" title="statement not covered" >    otherBooths: 'Other Booths',</span>
+<span class="cstat-no" title="statement not covered" >    parliamentaryConstituency: 'Parliamentary Constituency',</span>
+<span class="cstat-no" title="statement not covered" >    phase: 'Phase',</span>
+<span class="cstat-no" title="statement not covered" >    pollingDate: 'Polling Date',</span>
+<span class="cstat-no" title="statement not covered" >    nearbyBooths: 'Polling Booths Near You',</span>
+<span class="cstat-no" title="statement not covered" >    getDirections: 'Get Directions',</span>
+<span class="cstat-no" title="statement not covered" >    candidateComparison: 'Head-to-Head Comparison',</span>
+<span class="cstat-no" title="statement not covered" >    compare: 'Compare',</span>
+<span class="cstat-no" title="statement not covered" >    age: 'Age',</span>
+<span class="cstat-no" title="statement not covered" >    assets: 'Assets',</span>
+<span class="cstat-no" title="statement not covered" >    criminalCases: 'Criminal Cases',</span>
+<span class="cstat-no" title="statement not covered" >    party: 'Party',</span>
+&nbsp;
+    // Voting Guide
+<span class="cstat-no" title="statement not covered" >    guideHeading: 'Step-by-Step Voting Guide',</span>
+<span class="cstat-no" title="statement not covered" >    guideSub: 'Everything you need to know about exercising your democratic right, from registration to the polling booth.',</span>
+<span class="cstat-no" title="statement not covered" >    guideStep1Title: 'Check Your Voter Registration',</span>
+<span class="cstat-no" title="statement not covered" >    guideStep1Desc: 'Before election day, ensure your name appears on the official electoral roll. Use our status checker to verify.',</span>
+<span class="cstat-no" title="statement not covered" >    guideStep1Footer: 'Online verification takes 2 minutes',</span>
+<span class="cstat-no" title="statement not covered" >    guideStep2Title: 'Locate Your Polling Station',</span>
+<span class="cstat-no" title="statement not covered" >    guideStep2Desc: 'Find out exactly where you need to go. Use our interactive map to see your assigned booth and directions.',</span>
+<span class="cstat-no" title="statement not covered" >    guideStep2Footer: 'Booth details are updated live',</span>
+<span class="cstat-no" title="statement not covered" >    guideStep3Title: 'Prepare Your ID Documents',</span>
+<span class="cstat-no" title="statement not covered" >    guideStep3Desc: 'Collect your Voter ID (EPIC) or one of the 12 alternative photo identity documents approved by the ECI.',</span>
+<span class="cstat-no" title="statement not covered" >    guideStep3Footer: 'Original ID proof is mandatory',</span>
+<span class="cstat-no" title="statement not covered" >    guideStep4Title: 'Cast Your Vote Securely',</span>
+<span class="cstat-no" title="statement not covered" >    guideStep4Desc: 'At the booth, follow official instructions, verify your identity, and cast your vote on the EVM.',</span>
+<span class="cstat-no" title="statement not covered" >    guideStep4Footer: 'Wait for the beep sound to confirm',</span>
+<span class="cstat-no" title="statement not covered" >    readyToVote: "Ready to make your mark?",</span>
+<span class="cstat-no" title="statement not covered" >    checkBoothToday: "Check your polling booth and candidate list today to be prepared.",</span>
+<span class="cstat-no" title="statement not covered" >    backToDashboard: "Back to Dashboard",</span>
+&nbsp;
+    // More Dashboard &amp; UI
+<span class="cstat-no" title="statement not covered" >    onboarding: 'Onboarding',</span>
+<span class="cstat-no" title="statement not covered" >    settings: 'Settings',</span>
+<span class="cstat-no" title="statement not covered" >    reminders: 'Reminders',</span>
+<span class="cstat-no" title="statement not covered" >    saathiWelcome: 'Namaskaram! I am Saathi. I can help you find your polling booth, learn about candidates, or understand the voting process. How can I assist you today?',</span>
+<span class="cstat-no" title="statement not covered" >    saathiThinking: 'Saathi is thinking...',</span>
+<span class="cstat-no" title="statement not covered" >    citizenProfile: 'Citizen Profile',</span>
+<span class="cstat-no" title="statement not covered" >    yearsOld: 'Years Old',</span>
+<span class="cstat-no" title="statement not covered" >    verifiedEligibility: 'Verified Eligibility',</span>
+<span class="cstat-no" title="statement not covered" >    voterType: 'Voter Type',</span>
+<span class="cstat-no" title="statement not covered" >    quickActions: 'Quick Actions',</span>
+<span class="cstat-no" title="statement not covered" >    help: 'Help',</span>
+<span class="cstat-no" title="statement not covered" >    step: 'Step',</span>
+<span class="cstat-no" title="statement not covered" >    of: 'of',</span>
+<span class="cstat-no" title="statement not covered" >    enterAge: 'Enter your age',</span>
+<span class="cstat-no" title="statement not covered" >    allowLocation: 'Allow Location Access',</span>
+<span class="cstat-no" title="statement not covered" >    firstTimeVoterLabel: 'First-time Voter',</span>
+<span class="cstat-no" title="statement not covered" >    firstTimeVoterDesc: 'This is my first time voting in a general election.',</span>
+<span class="cstat-no" title="statement not covered" >    experiencedVoterLabel: 'Experienced Voter',</span>
+<span class="cstat-no" title="statement not covered" >    experiencedVoterDesc: 'I have voted in previous elections.',</span>
+<span class="cstat-no" title="statement not covered" >    update: 'Update',</span>
+<span class="cstat-no" title="statement not covered" >    constituency: 'Constituency',</span>
+<span class="cstat-no" title="statement not covered" >};</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >export const translations: Record&lt;Language, any&gt; = {</span>
+<span class="cstat-no" title="statement not covered" >  en: enBase,</span>
+<span class="cstat-no" title="statement not covered" >  hi: {</span>
+    // Nav
+<span class="cstat-no" title="statement not covered" >    home: 'होम',</span>
+<span class="cstat-no" title="statement not covered" >    dashboard: 'डैशबोर्ड',</span>
+<span class="cstat-no" title="statement not covered" >    guide: 'मार्गदर्शिका',</span>
+<span class="cstat-no" title="statement not covered" >    candidates: 'उम्मीदवार',</span>
+<span class="cstat-no" title="statement not covered" >    signIn: 'साइन इन',</span>
+<span class="cstat-no" title="statement not covered" >    getStarted: 'शुरू करें',</span>
+&nbsp;
+    // Hero
+<span class="cstat-no" title="statement not covered" >    heroTitle: 'हर भारतीय को वोट देने के लिए सशक्त बनाना।',</span>
+<span class="cstat-no" title="statement not covered" >    heroSubtitle: 'मतदाता मार्गदर्शन के लिए आधिकारिक, सुलभ पोर्टल पर आपका स्वागत है। अपना मतदान केंद्र खोजें, अपने उम्मीदवारों को जानें, और पूरी जानकारी के साथ अपने लोकतांत्रिक अधिकार का प्रयोग करें।',</span>
+<span class="cstat-no" title="statement not covered" >    startGuidance: 'मार्गदर्शन शुरू करें',</span>
+<span class="cstat-no" title="statement not covered" >    digitalUtility: 'डिजिटल सार्वजनिक उपयोगिता',</span>
+&nbsp;
+    // Accessibility Section
+<span class="cstat-no" title="statement not covered" >    accessibilityHeading: 'लोकतांत्रिक सुलभता के लिए डिज़ाइन किया गया',</span>
+<span class="cstat-no" title="statement not covered" >    accessibilitySub: 'हमारा प्लेटफ़ॉर्म आपकी आवश्यकताओं के अनुरूप है, यह सुनिश्चित करता है कि प्रत्येक नागरिक को महत्वपूर्ण मतदान जानकारी तक समान पहुंच प्राप्त हो।',</span>
+<span class="cstat-no" title="statement not covered" >    multilingual: 'बहुभाषी समर्थन',</span>
+<span class="cstat-no" title="statement not covered" >    multilingualDesc: 'अपने मतदान अधिकारों की पूरी समझ सुनिश्चित करने के लिए कई क्षेत्रीय भाषाओं में जानकारी प्राप्त करें।',</span>
+<span class="cstat-no" title="statement not covered" >    screenReader: 'स्क्रीन रीडर अनुकूलित',</span>
+<span class="cstat-no" title="statement not covered" >    screenReaderDesc: 'पूरी तरह से संरचित सामग्री और वर्णनात्मक लेबल दृष्टिबाधित उपयोगकर्ताओं के लिए निर्बाध नेविगेशन सुनिश्चित करते हैं।',</span>
+<span class="cstat-no" title="statement not covered" >    highContrast: 'उच्च कंट्रास्ट मोड',</span>
+<span class="cstat-no" title="statement not covered" >    highContrastDesc: 'आसान पढ़ने के लिए उच्च कंट्रास्ट और डिस्लेक्सिया-फ्रेंडली टाइपोग्राफी सहित विशेष विज़ुअल मोड टॉगल करें।',</span>
+&nbsp;
+    // Dashboard
+<span class="cstat-no" title="statement not covered" >    goodMorning: 'नमस्ते',</span>
+<span class="cstat-no" title="statement not covered" >    askSaathi: 'साथी से पूछें',</span>
+<span class="cstat-no" title="statement not covered" >    saathiSub: 'आपका डिजिटल चुनाव सहायक',</span>
+<span class="cstat-no" title="statement not covered" >    chatPlaceholder: 'वोटिंग, बूथ, उम्मीदवारों के बारे में पूछें...',</span>
+<span class="cstat-no" title="statement not covered" >    checkStatus: 'मतदाता स्थिति जांचें',</span>
+&nbsp;
+    // Onboarding
+<span class="cstat-no" title="statement not covered" >    onboardingAge: 'आयु सत्यापन',</span>
+<span class="cstat-no" title="statement not covered" >    onboardingLang: 'भाषा चुनें',</span>
+<span class="cstat-no" title="statement not covered" >    onboardingLoc: 'स्थान',</span>
+<span class="cstat-no" title="statement not covered" >    onboardingVoter: 'मतदाता स्थिति',</span>
+<span class="cstat-no" title="statement not covered" >    ageVerificationSub: 'चुनाव मार्गदर्शन के लिए अपनी पात्रता सत्यापित करने के लिए कृपया अपनी आयु दर्ज करें।',</span>
+<span class="cstat-no" title="statement not covered" >    selectLangSub: 'वोटिंग प्लेटफॉर्म नेविगेट करने के लिए अपनी पसंदीदा भाषा चुनें।',</span>
+<span class="cstat-no" title="statement not covered" >    locationSub: 'हम आपके निर्वाचन क्षेत्र की पहचान करने और आपको पास के मतदान केंद्र दिखाने के लिए आपके स्थान का उपयोग करते हैं।',</span>
+<span class="cstat-no" title="statement not covered" >    voterStatusSub: 'अपने अनुभव के आधार पर अपनी मार्गदर्शिका को अनुकूलित करने में हमारी सहायता करें।',</span>
+&nbsp;
+    // General
+<span class="cstat-no" title="statement not covered" >    back: 'पीछे',</span>
+<span class="cstat-no" title="statement not covered" >    continue: 'जारी रखें',</span>
+<span class="cstat-no" title="statement not covered" >    footerText: '© 2026 भारत निर्वाचन आयोग। लोकतांत्रिक सुलभता के लिए डिज़ाइन किया गया।',</span>
+&nbsp;
+    // Voting Guide
+<span class="cstat-no" title="statement not covered" >    guideHeading: 'चरण-दर-चरण मतदान मार्गदर्शिका',</span>
+<span class="cstat-no" title="statement not covered" >    guideSub: 'पंजीकरण से लेकर मतदान केंद्र तक, अपने लोकतांत्रिक अधिकार का प्रयोग करने के बारे में वह सब कुछ जो आपको जानना आवश्यक है।',</span>
+<span class="cstat-no" title="statement not covered" >    guideStep1Title: 'अपना मतदाता पंजीकरण जांचें',</span>
+<span class="cstat-no" title="statement not covered" >    guideStep1Desc: 'चुनाव के दिन से पहले, सुनिश्चित करें कि आपका नाम आधिकारिक मतदाता सूची में है। सत्यापित करने के लिए हमारे स्टेटस चेकर का उपयोग करें।',</span>
+<span class="cstat-no" title="statement not covered" >    guideStep1Footer: 'ऑनलाइन सत्यापन में 2 मिनट लगते हैं',</span>
+<span class="cstat-no" title="statement not covered" >    guideStep2Title: 'अपना मतदान केंद्र खोजें',</span>
+<span class="cstat-no" title="statement not covered" >    guideStep2Desc: 'पता करें कि आपको वोट डालने के लिए वास्तव में कहाँ जाना है। अपना आवंटित बूथ और निर्देश देखने के लिए हमारे इंटरेक्टिव मानचित्र का उपयोग करें।',</span>
+<span class="cstat-no" title="statement not covered" >    guideStep2Footer: 'बूथ विवरण लाइव अपडेट किए जाते हैं',</span>
+<span class="cstat-no" title="statement not covered" >    guideStep3Title: 'अपने पहचान पत्र तैयार करें',</span>
+<span class="cstat-no" title="statement not covered" >    guideStep3Desc: 'अपना मतदाता पहचान पत्र (EPIC) या चुनाव आयोग द्वारा अनुमोदित 12 वैकल्पिक फोटो पहचान दस्तावेजों में से एक एकत्र करें।',</span>
+<span class="cstat-no" title="statement not covered" >    guideStep3Footer: 'मूल पहचान पत्र अनिवार्य है',</span>
+<span class="cstat-no" title="statement not covered" >    guideStep4Title: 'अपना वोट सुरक्षित रूप से डालें',</span>
+<span class="cstat-no" title="statement not covered" >    guideStep4Desc: 'बूथ पर, आधिकारिक निर्देशों का पालन करें, अपनी पहचान सत्यापित करें, और EVM पर अपना वोट डालें।',</span>
+<span class="cstat-no" title="statement not covered" >    guideStep4Footer: 'पुष्टि करने के लिए बीप की आवाज़ का इंतज़ार करें',</span>
+<span class="cstat-no" title="statement not covered" >    readyToVote: "अपना निशान बनाने के लिए तैयार हैं?",</span>
+<span class="cstat-no" title="statement not covered" >    checkBoothToday: "तैयार रहने के लिए आज ही अपने मतदान केंद्र और उम्मीदवार सूची की जांच करें।",</span>
+<span class="cstat-no" title="statement not covered" >    backToDashboard: "डैशबोर्ड पर वापस जाएं",</span>
+<span class="cstat-no" title="statement not covered" >    constituency: 'निर्वाचन क्षेत्र',</span>
+<span class="cstat-no" title="statement not covered" >    settings: 'सेटिंग्स',</span>
+<span class="cstat-no" title="statement not covered" >    reminders: 'रिमाइंडर',</span>
+<span class="cstat-no" title="statement not covered" >    citizenProfile: 'नागरिक प्रोफाइल',</span>
+<span class="cstat-no" title="statement not covered" >    yearsOld: 'साल के',</span>
+<span class="cstat-no" title="statement not covered" >    verifiedEligibility: 'सत्यापित पात्रता',</span>
+<span class="cstat-no" title="statement not covered" >    voterType: 'मतदाता प्रकार',</span>
+<span class="cstat-no" title="statement not covered" >    quickActions: 'त्वरित कार्रवाई',</span>
+<span class="cstat-no" title="statement not covered" >    help: 'सहायता',</span>
+<span class="cstat-no" title="statement not covered" >    update: 'अपडेट',</span>
+<span class="cstat-no" title="statement not covered" >  },</span>
+<span class="cstat-no" title="statement not covered" >  te: {</span>
+    // Nav
+<span class="cstat-no" title="statement not covered" >    home: 'హోమ్',</span>
+<span class="cstat-no" title="statement not covered" >    dashboard: 'డ్యాష్‌బోర్డ్',</span>
+<span class="cstat-no" title="statement not covered" >    guide: 'మార్గదర్శిని',</span>
+<span class="cstat-no" title="statement not covered" >    candidates: 'అభ్యర్థులు',</span>
+<span class="cstat-no" title="statement not covered" >    signIn: 'సైన్ ఇన్',</span>
+<span class="cstat-no" title="statement not covered" >    getStarted: 'ప్రారంభించండి',</span>
+&nbsp;
+    // Hero
+<span class="cstat-no" title="statement not covered" >    heroTitle: 'ప్రతి భారతీయుడిని ఓటు వేయడానికి శక్తివంతం చేయడం.',</span>
+<span class="cstat-no" title="statement not covered" >    heroSubtitle: 'ఓటరు మార్గదర్శకత్వం కోసం అధికారిక, ప్రాప్యత పోర్టల్‌కు స్వాగతం. మీ పోలింగ్ బూత్‌ను కనుగొనండి, మీ అభ్యర్థులను తెలుసుకోండి మరియు పూర్తి సమాచారంతో మీ ప్రజాస్వామ్య హక్కును ఉపయోగించుకోండి.',</span>
+<span class="cstat-no" title="statement not covered" >    startGuidance: 'మార్గదర్శకత్వం ప్రారంభించండి',</span>
+<span class="cstat-no" title="statement not covered" >    digitalUtility: 'డిజిటల్ పబ్లిక్ యుటిలిటీ',</span>
+&nbsp;
+    // Accessibility Section
+<span class="cstat-no" title="statement not covered" >    accessibilityHeading: 'ప్రజాస్వామ్య ప్రాప్యత కోసం రూపొందించబడింది',</span>
+<span class="cstat-no" title="statement not covered" >    accessibilitySub: 'మా ప్లాట్‌ఫారమ్ మీ అవసరాలకు అనుగుణంగా మారుతుంది, ప్రతి పౌరుడికి క్లిష్టమైన ఓటింగ్ సమాచారానికి సమాన ప్రాప్యతను నిర్ధారిస్తుంది.',</span>
+<span class="cstat-no" title="statement not covered" >    multilingual: 'బహుభాషా మద్దతు',</span>
+<span class="cstat-no" title="statement not covered" >    multilingualDesc: 'మీ ఓటింగ్ హక్కుల గురించి పూర్తి అవగాహన ఉండేలా బహుళ ప్రాంతీయ భాషల్లో సమాచారాన్ని పొందండి.',</span>
+<span class="cstat-no" title="statement not covered" >    screenReader: 'స్క్రీన్ రీడర్ ఆప్టిమైజ్ చేయబడింది',</span>
+<span class="cstat-no" title="statement not covered" >    screenReaderDesc: 'పూర్తిగా నిర్మాణాత్మకమైన కంటెంట్ మరియు వివరణాత్మక లేబుల్‌లు దృష్టి లోపం ఉన్న వినియోగదారులకు అతుకులు లేని నావిగేషన్‌ను నిర్ధారిస్తాయి.',</span>
+<span class="cstat-no" title="statement not covered" >    highContrast: 'హై కాంట్రాస్ట్ మోడ్‌లు',</span>
+<span class="cstat-no" title="statement not covered" >    highContrastDesc: 'సులభంగా చదవడం కోసం హై కాంట్రాస్ట్ మరియు డైస్లెక్సియా-ఫ్రెండ్లీ టైపోగ్రఫీతో సహా ప్రత్యేక దృశ్య మోడ్‌లను టోగుల్ చేయండి.',</span>
+&nbsp;
+    // Dashboard
+<span class="cstat-no" title="statement not covered" >    goodMorning: 'నమస్కారం',</span>
+<span class="cstat-no" title="statement not covered" >    askSaathi: 'సారథిని అడగండి',</span>
+<span class="cstat-no" title="statement not covered" >    saathiSub: 'మీ డిజిటల్ ఎన్నికల సహాయకుడు',</span>
+<span class="cstat-no" title="statement not covered" >    chatPlaceholder: 'ఓటింగ్, బూత్‌లు, అభ్యర్థుల గురించి అడగండి...',</span>
+<span class="cstat-no" title="statement not covered" >    checkStatus: 'ఓటరు స్థితిని తనిఖీ చేయండి',</span>
+&nbsp;
+    // Onboarding
+<span class="cstat-no" title="statement not covered" >    onboardingAge: 'వయస్సు ధృవీకరణ',</span>
+<span class="cstat-no" title="statement not covered" >    onboardingLang: 'భాషను ఎంచుకోండి',</span>
+<span class="cstat-no" title="statement not covered" >    onboardingLoc: 'స్థానం',</span>
+<span class="cstat-no" title="statement not covered" >    onboardingVoter: 'ఓటరు స్థితి',</span>
+<span class="cstat-no" title="statement not covered" >    ageVerificationSub: 'ఎన్నికల మార్గదర్శకత్వం కోసం మీ అర్హతను ధృవీకరించడానికి దయచేసి మీ వయస్సును నమోదు చేయండి.',</span>
+<span class="cstat-no" title="statement not covered" >    selectLangSub: 'ఓటింగ్ ప్లాట్‌ఫారమ్‌ను నావిగేట్ చేయడానికి మీరు ఇష్టపడే భాషను ఎంచుకోండి.',</span>
+<span class="cstat-no" title="statement not covered" >    locationSub: 'మీ నియోజకవర్గాన్ని గుర్తించడానికి మరియు మీకు సమీపంలోని పోలింగ్ బూత్‌లను చూపించడానికి మేము మీ స్థానాన్ని ఉపయోగిస్తాము.',</span>
+<span class="cstat-no" title="statement not covered" >    voterStatusSub: 'మీ అనుభవం ఆధారంగా మీ గైడ్‌ను అనుకూలీకరించడంలో మాకు సహాయపడండి.',</span>
+&nbsp;
+    // General
+<span class="cstat-no" title="statement not covered" >    back: 'వెనుకకు',</span>
+<span class="cstat-no" title="statement not covered" >    continue: 'కొనసాగించు',</span>
+<span class="cstat-no" title="statement not covered" >    footerText: '© 2026 భారత ఎన్నికల సంఘం. ప్రజాస్వామ్య ప్రాప్యత కోసం రూపొందించబడింది.',</span>
+&nbsp;
+    // Voting Guide
+<span class="cstat-no" title="statement not covered" >    guideHeading: 'దశలవారీ ఓటింగ్ మార్గదర్శిని',</span>
+<span class="cstat-no" title="statement not covered" >    guideSub: 'నమోదు నుండి పోలింగ్ బూత్ వరకు, మీ ప్రజాస్వామ్య హక్కును ఉపయోగించుకోవడం గురించి మీరు తెలుసుకోవలసిన ప్రతిదీ.',</span>
+<span class="cstat-no" title="statement not covered" >    guideStep1Title: 'మీ ఓటరు నమోదును తనిఖీ చేయండి',</span>
+<span class="cstat-no" title="statement not covered" >    guideStep1Desc: 'ఎన్నికల రోజుకు ముందు, అధికారిక ఓటరు జాబితాలో మీ పేరు ఉందని నిర్ధారించుకోండి. ధృవీకరించడానికి మా స్టేటస్ చెకర్‌ని ఉపయోగించండి.',</span>
+<span class="cstat-no" title="statement not covered" >    guideStep1Footer: 'ఆన్‌లైన్ ధృవీకరణకు 2 నిమిషాలు పడుతుంది',</span>
+<span class="cstat-no" title="statement not covered" >    guideStep2Title: 'మీ పోలింగ్ కేంద్రాన్ని గుర్తించండి',</span>
+<span class="cstat-no" title="statement not covered" >    guideStep2Desc: 'ఓటు వేయడానికి మీరు సరిగ్గా ఎక్కడికి వెళ్లాలో తెలుసుకోండి. మీ కేటాయించిన బూత్ మరియు దిశలను చూడటానికి మా ఇంటరాక్టివ్ మ్యాప్‌ను ఉపయోగించండి.',</span>
+<span class="cstat-no" title="statement not covered" >    guideStep2Footer: 'బూత్ వివరాలు ప్రత్యక్షంగా నవీకరించబడతాయి',</span>
+<span class="cstat-no" title="statement not covered" >    guideStep3Title: 'మీ గుర్తింపు పత్రాలను సిద్ధం చేసుకోండి',</span>
+<span class="cstat-no" title="statement not covered" >    guideStep3Desc: 'మీ ఓటరు గుర్తింపు కార్డు (EPIC) లేదా ECI ఆమోదించిన 12 ప్రత్యామ్నాయ ఫోటో గుర్తింపు పత్రాలలో ఒకదాన్ని సేకరించండి.',</span>
+<span class="cstat-no" title="statement not covered" >    guideStep3Footer: 'అసలు గుర్తింపు పత్రం తప్పనిసరి',</span>
+<span class="cstat-no" title="statement not covered" >    guideStep4Title: 'మీ ఓటును సురక్షితంగా వేయండి',</span>
+<span class="cstat-no" title="statement not covered" >    guideStep4Desc: 'బూత్ వద్ద, అధికారిక సూచనలను అనుసరించండి, మీ గుర్తింపును ధృవీకరించండి మరియు EVM లో మీ ఓటు వేయండి.',</span>
+<span class="cstat-no" title="statement not covered" >    guideStep4Footer: 'ధృవీకరించడానికి బీప్ శబ్దం కోసం వేచి ఉండండి',</span>
+<span class="cstat-no" title="statement not covered" >    readyToVote: "మీ ముద్ర వేయడానికి సిద్ధంగా ఉన్నారా?",</span>
+<span class="cstat-no" title="statement not covered" >    checkBoothToday: "సిద్ధంగా ఉండటానికి ఈరోజే మీ పోలింగ్ బూత్ మరియు అభ్యర్థుల జాబితాను తనిఖీ చేయండి.",</span>
+<span class="cstat-no" title="statement not covered" >    backToDashboard: "డ్యాష్‌బోర్డ్‌కు తిరిగి వెళ్ళు",</span>
+<span class="cstat-no" title="statement not covered" >    constituency: 'నియోజకవర్గం',</span>
+<span class="cstat-no" title="statement not covered" >    settings: 'సెట్టింగ్‌లు',</span>
+<span class="cstat-no" title="statement not covered" >    reminders: 'రిమైండర్‌లు',</span>
+<span class="cstat-no" title="statement not covered" >    citizenProfile: 'పౌర ప్రొఫైల్',</span>
+<span class="cstat-no" title="statement not covered" >    yearsOld: 'సంవత్సరాలు',</span>
+<span class="cstat-no" title="statement not covered" >    verifiedEligibility: 'ధృవీకరించబడిన అర్హత',</span>
+<span class="cstat-no" title="statement not covered" >    voterType: 'ఓటరు రకం',</span>
+<span class="cstat-no" title="statement not covered" >    quickActions: 'త్వరిత చర్యలు',</span>
+<span class="cstat-no" title="statement not covered" >    help: 'సహాయం',</span>
+<span class="cstat-no" title="statement not covered" >    update: 'అప్‌డేట్',</span>
+<span class="cstat-no" title="statement not covered" >  },</span>
+<span class="cstat-no" title="statement not covered" >  ta: { ...enBase },</span>
+<span class="cstat-no" title="statement not covered" >  kn: { ...enBase },</span>
+<span class="cstat-no" title="statement not covered" >  ml: { ...enBase },</span>
+<span class="cstat-no" title="statement not covered" >  mr: { ...enBase },</span>
+<span class="cstat-no" title="statement not covered" >  bn: { ...enBase },</span>
+<span class="cstat-no" title="statement not covered" >  gu: { ...enBase },</span>
+<span class="cstat-no" title="statement not covered" >};</span>
+&nbsp;</pre></td></tr></table></pre>
+
+                <div class='push'></div><!-- for sticky footer -->
+            </div><!-- /wrapper -->
+            <div class='footer quiet pad2 space-top1 center small'>
+                Code coverage generated by
+                <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
+                at 2026-04-25T04:41:10.774Z
+            </div>
+        <script src="../../../prettify.js"></script>
+        <script>
+            window.onload = function () {
+                prettyPrint();
+            };
+        </script>
+        <script src="../../../sorter.js"></script>
+        <script src="../../../block-navigation.js"></script>
+    </body>
+</html>
+    

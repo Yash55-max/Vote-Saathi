@@ -37,7 +37,7 @@ Built with inclusivity at its core for elderly and differently-abled voters.
 
 ---
 
-## 📸 Screenshots
+## 📸 Project Gallery
 
 ### 🏠 Home Page
 ![VoteSaathi Home](frontend/public/votesaathi_dashboard_preview.png)

@@ -151,7 +151,8 @@ export default function OnboardingPage() {
   };
 
   const canProceed = () => {
-    if (step === 1) return profile.age !== '' && Number(profile.age) >= 18;
+    const ageNum = Number(profile.age);
+    if (step === 1) return profile.age !== '' && !isNaN(ageNum) && ageNum >= 18;
     if (step === 4) return profile.firstTimeVoter !== null;
     return true;
   };

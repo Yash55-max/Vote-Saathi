@@ -69,7 +69,7 @@ async def health_check():
         services={
             "gemini": settings.has_gemini_api_key,
             "maps": settings.has_google_maps_api_key,
-            "logging": "google-cloud" if "google.cloud.logging" in sys.modules else "standard"
+            "logging": "google.cloud.logging" in sys.modules
         },
     )
 

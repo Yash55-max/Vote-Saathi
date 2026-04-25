@@ -1,10 +1,44 @@
 # 🗳️ VoteSaathi: Your Digital Election Companion
 
-[![CI](https://github.com/Yash55-max/Vote-Saathi/actions/workflows/ci.yml/badge.svg)](https://github.com/Yash55-max/Vote-Saathi/actions/workflows/ci.yml)  [![Backend Lint](https://img.shields.io/badge/Backend%20Lint-Ruff-2ea44f?style=for-the-badge&logo=python&logoColor=white)](.github/workflows/ci.yml)  [![Coverage](https://codecov.io/gh/Yash55-max/Vote-Saathi/branch/main/graph/badge.svg)](https://codecov.io/gh/Yash55-max/Vote-Saathi)  [![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)  [![FastAPI](https://img.shields.io/badge/FastAPI-0.109-009688?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)  [![Firebase](https://img.shields.io/badge/Firebase-Auth%20%26%20Firestore-FFCA28?style=for-the-badge&logo=firebase)](https://firebase.google.com/)  [![Google Gemini](https://img.shields.io/badge/Google%20Gemini-AI%20Assistant-4285F4?style=for-the-badge&logo=google-gemini)](https://ai.google.dev/)  [![Google Maps](https://img.shields.io/badge/Google%20Maps-Geospatial-4285F4?style=for-the-badge&logo=google-maps)](https://mapsplatform.google.com/)  [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
+[![CI](https://github.com/Yash55-max/Vote-Saathi/actions/workflows/ci.yml/badge.svg)](https://github.com/Yash55-max/Vote-Saathi/actions/workflows/ci.yml)
+[![Backend Lint](https://img.shields.io/badge/Backend%20Lint-Ruff-2ea44f?style=for-the-badge&logo=python&logoColor=white)](.github/workflows/ci.yml)
+[![Coverage](https://codecov.io/gh/Yash55-max/Vote-Saathi/branch/main/graph/badge.svg)](https://codecov.io/gh/Yash55-max/Vote-Saathi)
+[![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.109-009688?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
+[![Firebase](https://img.shields.io/badge/Firebase-Auth%20%26%20Firestore-FFCA28?style=for-the-badge&logo=firebase)](https://firebase.google.com/)
+[![Google Gemini](https://img.shields.io/badge/Google%20Gemini-AI%20Assistant-4285F4?style=for-the-badge&logo=google-gemini)](https://ai.google.dev/)
+[![Google Maps](https://img.shields.io/badge/Google%20Maps-Geospatial-4285F4?style=for-the-badge&logo=google-maps)](https://mapsplatform.google.com/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
 
 **VoteSaathi** is a context-aware, accessible digital public utility designed to empower Indian citizens through the democratic process. It provides personalized election guidance, multi-language AI assistance, and real-time polling booth navigation to ensure no voter is left behind.
 
 ---
+
+## 🎯 Project Overview
+
+### 🏗️ Chosen Vertical
+**Civic Tech & Digital Public Infrastructure (DPI)**  
+VoteSaathi is positioned as a digital public utility designed to bridge the information gap in the Indian electoral process, specifically targeting first-time voters, elderly citizens, and differently-abled individuals.
+
+### 🧠 Approach and Logic
+The project follows a **"Context-First"** architecture:
+- **Personalised Logic**: Instead of a generic FAQ, the system uses the user's profile (Age, Voter Status, Location) to calibrate Gemini's responses. An 18-year-old is guided through registration, while a 70-year-old is informed about "Vote from Home" facilities.
+- **Multilingual Foundation**: Logic is abstracted to support India's linguistic diversity, using Gemini's native translation capabilities paired with verified electoral datasets.
+- **Geospatial Discovery**: Mapping logic translates raw coordinates into actionable directions to the nearest verified polling booths.
+
+### 🛠️ How the Solution Works
+1. **User Profiling**: Users authenticate via Firebase and provide minimal demographic data.
+2. **AI Interaction**: Queries sent to the **Ask Saathi** assistant are processed by a FastAPI backend. We use **Google Gemini** with a specialised System Instruction that restricts it to authoritative ECI sources, preventing AI hallucinations.
+3. **Dynamic Resource Hub**: The dashboard dynamically fetches resources (Form 6, Voter Slip downloads) based on the current election cycle state.
+4. **Accessibility Engine**: A custom-built engine intercepts the DOM to apply real-time accessibility transformations (Dyslexia fonts, contrast shifts) without page reloads.
+
+### 📝 Assumptions Made
+- **Internet Access**: The platform assumes users have at least a 3G/4G connection for real-time AI and Map rendering.
+- **Location Permissions**: Assumes users will grant location access for accurate constituency mapping.
+- **Verified Sources**: Assumes that information provided via the "Ask Saathi" assistant is cross-referenced with official ECI guidelines provided in the prompt context.
+
+---
+
 
 ## 🚀 Key Features
 
@@ -15,17 +49,17 @@ A context-aware chatbot powered by **Google Gemini** that provides authoritative
 
 ### 📍 Real-Time Constituency Mapping
 Integrated with **Google Maps API** for precise geospatial navigation.
-*   **Polling Booth Locator**: Automatically detects the user's constituency and maps nearby polling stations with multi-marker visualization.
+*   **Polling Booth Locator**: Automatically detects the user's constituency and maps nearby polling stations with multi-marker visualisation.
 *   **Live Directions**: Provides exact coordinates and addresses for verified polling booths.
 
 ### ♿ Universal Accessibility Engine
 Built with inclusivity at its core for elderly and differently-abled voters.
 *   **Dynamic Themes**: Support for Light, Dark, and High-Contrast modes.
-*   **Accessibility Toolbar**: One-click toggles for Dyslexia-friendly fonts, Text Scaling, and Screen Reader optimization.
+*   **Accessibility Toolbar**: One-click toggles for Dyslexia-friendly fonts, Text Scaling, and Screen Reader optimisation.
 
 ### 📋 Official Resource Hub
 *   **Direct Links**: Access to the ECI Voter Portal, 1950 Helpline, and Grievance portals.
-*   **Personalized Reminders**: Set election dates and polling day alerts.
+*   **Personalised Reminders**: Set election dates and polling day alerts.
 
 ---
 

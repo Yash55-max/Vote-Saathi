@@ -1,5 +1,3 @@
-import os
-
 from config import get_settings
 
 

@@ -58,7 +58,9 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run backend tests
-        run: pytest -q --cov=. --cov-report=xml --cov-report=term-missing
+        run: |
+          export PYTHONPATH=$PYTHONPATH:.
+          pytest -q --cov=. --cov-report=xml --cov-report=term-missing
 
       - name: Upload backend coverage to Codecov
         uses: codecov/codecov-action@v5
@@ -66,7 +68,7 @@ jobs:
           files: backend/coverage.xml
           flags: backend
           name: backend-coverage
-          fail_ci_if_error: true
+          fail_ci_if_error: false
 
   frontend:
     name: Frontend Tests
@@ -101,7 +103,7 @@ jobs:
           files: frontend/coverage/cobertura-coverage.xml
           flags: frontend
           name: frontend-coverage
-          fail_ci_if_error: true
+          fail_ci_if_error: false
 
       - name: Build frontend
         run: npm run build

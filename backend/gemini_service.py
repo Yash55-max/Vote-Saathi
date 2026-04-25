@@ -11,7 +11,7 @@ from config import get_settings
 settings = get_settings()
 
 # One-time SDK configuration — new SDK uses a Client object
-_client = genai.Client(api_key=settings.gemini_api_key)
+_client = genai.Client(api_key=settings.gemini_api_key_value)
 
 LANGUAGE_INSTRUCTIONS = {
     "en": "Respond in clear, simple English.",

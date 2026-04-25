@@ -35,11 +35,12 @@ export async function saveInteraction(interaction: Omit<Interaction, 'id' | 'tim
 }
 
 export async function getUserInteractions(uid: string, limitCount = 20): Promise<Interaction[]> {
+  const safeLimit = Math.max(1, Math.min(limitCount, 50));
   const q = query(
     collection(db, 'interactions'),
     where('uid', '==', uid),
     orderBy('timestamp', 'desc'),
-    limit(limitCount)
+    limit(safeLimit)
   );
   const snap = await getDocs(q);
   return snap.docs.map(d => ({ id: d.id, ...d.data() } as Interaction));

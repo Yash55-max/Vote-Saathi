@@ -1,5 +1,8 @@
 # 🗳️ VoteSaathi: Your Digital Election Companion
 
+[![CI](./actions/workflows/ci.yml/badge.svg)](./actions/workflows/ci.yml)
+[![Backend Lint](https://img.shields.io/badge/Backend%20Lint-Ruff-2ea44f?style=for-the-badge&logo=python&logoColor=white)](.github/workflows/ci.yml)
+[![Coverage](https://codecov.io/gh/Yash55-max/Vote-Saathi/branch/main/graph/badge.svg)](https://codecov.io/gh/Yash55-max/Vote-Saathi)
 [![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.109-009688?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
 [![Firebase](https://img.shields.io/badge/Firebase-Auth%20%26%20Firestore-FFCA28?style=for-the-badge&logo=firebase)](https://firebase.google.com/)
@@ -33,6 +36,26 @@ Built with inclusivity at its core for elderly and differently-abled voters.
 *   **Personalized Reminders**: Set election dates and polling day alerts.
 
 ---
+
+## 📸 Screenshots
+
+### 🏠 Home Page
+![VoteSaathi Home](frontend/public/votesaathi_dashboard_preview.png)
+
+### 📊 Citizen Dashboard (Demo Mode)
+![Dashboard Overview](screenshots/dashboard.png)
+
+### 👥 Candidate Profiles
+![Candidate List](screenshots/candidates.png)
+
+### 🤖 AI-Powered "Ask Saathi" Assistant
+![AI Assistant Chat](screenshots/ai_assistant.png)
+
+### ♿ Universal Accessibility Engine (High Contrast)
+![Accessibility Mode](screenshots/accessibility.png)
+
+---
+
 
 ## 🛠️ Technical Stack
 
@@ -74,5 +97,41 @@ npm run dev
 
 ## 🏛️ Digital Public Utility
 VoteSaathi is designed to be a **Digital Public Infrastructure (DPI)** component, prioritizing privacy, security, and accessibility for all Indian citizens.
+
+---
+
+## 2.4 Data Model
+
+### User
+- `id`
+- `age`
+- `location`
+- `language`
+- `voter_status`
+
+### Interaction
+- `query`
+- `response`
+- `timestamp`
+
+The backend enforces these structures through Pydantic models and frontend types.
+
+## 2.5 Security
+
+- Firebase security rules are defined in `firebase.rules` with per-user ownership checks.
+- API keys are loaded server-side as secret values in backend settings.
+- Request payloads are validated with strict schemas (`extra = forbid`, typed literals, and field bounds).
+
+## 2.6 Performance
+
+- Backend response caching for candidate lists and maps lookups (TTL cache).
+- Optimized Firestore interaction query limits to prevent excessive reads.
+- Lazy-loaded Google Maps marker UI in the constituency page to reduce initial bundle cost.
+
+## 2.7 Testing
+
+- Unit tests: schema/data-model validation in `backend/tests/test_schemas.py`.
+- Integration tests: API endpoints and service wiring in `backend/tests/test_api.py`.
+- Edge cases: empty/oversized chat input, invalid history role, and invalid coordinates.
 
 Made with ❤️ for Indian Voters.

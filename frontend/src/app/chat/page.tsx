@@ -59,7 +59,7 @@ export default function ChatPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           message: text,
-          context: { language: 'en', age: null, location: null, firstTimeVoter: null },
+          context: { language: 'en', age: null, location: null, first_time_voter: null },
         }),
       });
       const data = await res.json();

@@ -4,6 +4,7 @@ Google Maps service — reverse geocoding and polling booth lookup.
 from __future__ import annotations
 
 import httpx
+from cache import TTLCache
 from config import get_settings
 
 settings = get_settings()
@@ -11,16 +12,24 @@ settings = get_settings()
 GEOCODE_URL    = "https://maps.googleapis.com/maps/api/geocode/json"
 PLACES_URL     = "https://maps.googleapis.com/maps/api/place/nearbysearch/json"
 
+_reverse_geocode_cache: TTLCache[dict] = TTLCache(ttl_seconds=300, max_items=512)
+_booths_cache: TTLCache[list[dict]] = TTLCache(ttl_seconds=300, max_items=512)
+
 
 async def reverse_geocode(lat: float, lng: float) -> dict:
     """
     Convert lat/lng → constituency + state via Google Geocoding API.
     Returns dict with keys: constituency, state, formatted_address.
     """
+    cache_key = f"rg:{round(lat, 4)}:{round(lng, 4)}"
+    cached = _reverse_geocode_cache.get(cache_key)
+    if cached is not None:
+        return cached
+
     async with httpx.AsyncClient(timeout=10) as client:
         resp = await client.get(GEOCODE_URL, params={
             "latlng": f"{lat},{lng}",
-            "key": settings.google_maps_api_key,
+            "key": settings.google_maps_api_key_value,
             "language": "en",
         })
     data = resp.json()
@@ -56,6 +65,7 @@ async def reverse_geocode(lat: float, lng: float) -> dict:
             if "administrative_area_level_1" in types:
                 result["state"] = comp.get("long_name", "Unknown")
 
+    _reverse_geocode_cache.set(cache_key, result)
     return result
 
 
@@ -66,12 +76,17 @@ async def find_polling_booths(lat: float, lng: float) -> list[dict]:
     """
     # In production, use a real election booth dataset or ECI API.
     # This uses Places API as a proxy — searching for government offices.
+    cache_key = f"pb:{round(lat, 4)}:{round(lng, 4)}"
+    cached = _booths_cache.get(cache_key)
+    if cached is not None:
+        return cached
+
     async with httpx.AsyncClient(timeout=10) as client:
         resp = await client.get(PLACES_URL, params={
             "location": f"{lat},{lng}",
             "radius": 3000,
             "type": "local_government_office",
-            "key": settings.google_maps_api_key,
+            "key": settings.google_maps_api_key_value,
             "language": "en",
         })
     data = resp.json()
@@ -85,4 +100,5 @@ async def find_polling_booths(lat: float, lng: float) -> list[dict]:
             "lat": geo.get("lat"),
             "lng": geo.get("lng"),
         })
+    _booths_cache.set(cache_key, booths)
     return booths

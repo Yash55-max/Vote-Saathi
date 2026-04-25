@@ -1,7 +1,8 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
 import { 
   ArrowLeft, 
@@ -19,8 +20,13 @@ import {
 import { useTranslation } from '@/hooks/useTranslation';
 import { useUserStore } from '@/store/userStore';
 import toast from 'react-hot-toast';
-import { db } from '@/lib/firebase';
+import { auth, db } from '@/lib/firebase';
 import { doc, setDoc } from 'firebase/firestore';
+
+const LazyMapWithMarkers = dynamic(() => import('@/components/LazyMapWithMarkers'), {
+  ssr: false,
+  loading: () => <div className="w-full h-full bg-slate-800 animate-pulse" />,
+});
 
 export default function ConstituencyPage() {
   const { t } = useTranslation();
@@ -50,8 +56,8 @@ export default function ConstituencyPage() {
         setConstituencyData(data);
         setBooths(data.booths || []);
         
-        // Sync with Profile if logged in
-        if (profile?.id) {
+        // Sync with Firestore only for authenticated users.
+        if (profile?.id && auth.currentUser?.uid === profile.id) {
           const updatedProfile = {
             ...profile,
             constituency: data.constituency,
@@ -61,6 +67,15 @@ export default function ConstituencyPage() {
           };
           await setDoc(doc(db, 'users', profile.id), updatedProfile, { merge: true });
           setProfileStore(updatedProfile as any);
+        } else if (profile?.id) {
+          // Keep local state updated for demo mode or signed-out sessions.
+          setProfileStore({
+            ...profile,
+            constituency: data.constituency,
+            state: data.state,
+            formatted_address: data.formatted_address,
+            booths: data.booths || [],
+          } as any);
         }
 
         toast.success('Location identified & Profile updated');
@@ -143,7 +158,7 @@ export default function ConstituencyPage() {
              {/* Map Content */}
              <div className="h-[600px] bg-slate-900 relative flex items-center justify-center overflow-hidden">
                 {process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY && (constituencyData || profile?.booths?.length) ? (
-                  <MapWithMarkers 
+                  <LazyMapWithMarkers
                     apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
                     booths={booths.length > 0 ? booths : (profile?.booths || [])}
                   />
@@ -275,86 +290,4 @@ export default function ConstituencyPage() {
       </footer>
     </div>
   );
-}
-
-// ─── Custom Google Map with Multi-Markers ────────────────────
-
-function MapWithMarkers({ apiKey, booths }: { apiKey: string, booths: any[] }) {
-  const mapRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!mapRef.current || !booths.length) return;
-
-    // 1. Load Google Maps Script
-    const scriptId = 'google-maps-script';
-    if (!document.getElementById(scriptId)) {
-      const script = document.createElement('script');
-      script.id = scriptId;
-      script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`;
-      script.async = true;
-      script.defer = true;
-      script.onload = initMap;
-      document.head.appendChild(script);
-    } else {
-      initMap();
-    }
-
-    function initMap() {
-      if (!window.google || !mapRef.current) return;
-
-      const map = new window.google.maps.Map(mapRef.current, {
-        zoom: 14,
-        center: { lat: booths[0].lat, lng: booths[0].lng },
-        disableDefaultUI: true,
-        styles: [
-          {
-            "featureType": "all",
-            "elementType": "labels.text.fill",
-            "stylers": [{ "color": "#7c93a3" }, { "lightness": "-10" }]
-          }
-        ]
-      });
-
-      const bounds = new window.google.maps.LatLngBounds();
-
-      booths.forEach((booth, i) => {
-        if (!booth.lat || !booth.lng) return;
-        
-        const marker = new window.google.maps.Marker({
-          position: { lat: booth.lat, lng: booth.lng },
-          map,
-          title: booth.name,
-          icon: i === 0 
-            ? 'http://maps.google.com/mapfiles/ms/icons/orange-dot.png' 
-            : 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
-          animation: i === 0 ? window.google.maps.Animation.BOUNCE : null
-        });
-
-        const infoWindow = new window.google.maps.InfoWindow({
-          content: `<div style="color: #1e293b; padding: 4px;">
-                      <div style="font-weight: bold; font-size: 12px; margin-bottom: 2px;">${booth.name}</div>
-                      <div style="font-size: 10px; opacity: 0.8;">${booth.address}</div>
-                    </div>`
-        });
-
-        marker.addListener('click', () => {
-          infoWindow.open(map, marker);
-        });
-
-        bounds.extend(marker.getPosition()!);
-      });
-
-      if (booths.length > 1) {
-        map.fitBounds(bounds);
-      }
-    }
-  }, [apiKey, booths]);
-
-  return <div ref={mapRef} className="w-full h-full" />;
-}
-
-declare global {
-  interface Window {
-    google: any;
-  }
 }

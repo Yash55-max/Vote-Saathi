@@ -19,6 +19,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from cache import TTLCache
 
 from config import get_settings
 from schemas import (
@@ -38,6 +39,7 @@ import maps_service
 settings = get_settings()
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 log = logging.getLogger("votesaathi")
+_candidate_cache: TTLCache[list[CandidateResponse]] = TTLCache(ttl_seconds=120, max_items=128)
 
 # ─── Mock candidate data (replace with Firestore/ECI API) ────
 
@@ -97,8 +99,8 @@ async def global_exception_handler(request: Request, exc: Exception):
 @app.get("/", response_model=HealthResponse, tags=["Health"])
 async def health_check():
     """Health check endpoint."""
-    gemini_ok = bool(settings.gemini_api_key)
-    maps_ok   = bool(settings.google_maps_api_key)
+    gemini_ok = settings.has_gemini_api_key
+    maps_ok   = settings.has_google_maps_api_key
     return HealthResponse(
         status="ok",
         version="1.0.0",
@@ -115,7 +117,7 @@ async def chat(body: ChatRequest):
     first-time voter status) injected into the system prompt, ensuring
     personalized, relevant responses.
     """
-    if not settings.gemini_api_key:
+    if not settings.has_gemini_api_key:
         raise HTTPException(
             status_code=503,
             detail="Gemini API key not configured. Set GEMINI_API_KEY in .env"
@@ -152,7 +154,7 @@ async def get_constituency(body: ConstituencyRequest):
     """
     Reverse geocode lat/lng → constituency + nearest polling booths.
     """
-    if not settings.google_maps_api_key:
+    if not settings.has_google_maps_api_key:
         # Return mock data when Maps API key is not configured
         log.warning("Maps API key not set — returning mock constituency data.")
         return ConstituencyResponse(
@@ -197,10 +199,19 @@ async def get_candidates(constituency: str | None = None):
     """
     Return candidate list, optionally filtered by constituency.
     """
+    cache_key = (constituency or "ALL").strip().lower()
+    cached = _candidate_cache.get(cache_key)
+    if cached is not None:
+        return cached
+
     candidates = MOCK_CANDIDATES
     if constituency:
-        candidates = [c for c in candidates if c["constituency"].lower() == constituency.lower()]
-    return [CandidateResponse(**c) for c in candidates]
+        needle = constituency.strip().lower()
+        candidates = [c for c in candidates if c["constituency"].lower() == needle]
+
+    result = [CandidateResponse(**c) for c in candidates]
+    _candidate_cache.set(cache_key, result)
+    return result
 
 
 # ─── Entry point ─────────────────────────────────────────────

@@ -6,6 +6,7 @@ Refactored with modular routers and Google Cloud Logging integration.
 from __future__ import annotations
 
 import os
+import sys
 os.environ.setdefault("PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION", "python")
 
 import logging
@@ -68,7 +69,7 @@ async def health_check():
         services={
             "gemini": settings.has_gemini_api_key,
             "maps": settings.has_google_maps_api_key,
-            "logging": "google-cloud" if "google.cloud.logging" in os.modules else "standard"
+            "logging": "google-cloud" if "google.cloud.logging" in sys.modules else "standard"
         },
     )
 

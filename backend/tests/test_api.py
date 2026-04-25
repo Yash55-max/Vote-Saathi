@@ -31,7 +31,7 @@ def test_chat_accepts_valid_request(monkeypatch) -> None:
         return "This is a mock reply"
 
     app_main.settings.gemini_api_key = SecretStr("test-key")
-    monkeypatch.setattr(app_main.gemini_service, "get_ai_response", _fake_ai_response)
+    monkeypatch.setattr("routers.chat.gemini_service.get_ai_response", _fake_ai_response)
 
     response = client.post(
         "/api/chat",
@@ -102,8 +102,8 @@ def test_constituency_uses_maps_service_when_key_present(monkeypatch) -> None:
         ]
 
     app_main.settings.google_maps_api_key = SecretStr("maps-key")
-    monkeypatch.setattr(app_main.maps_service, "reverse_geocode", _fake_reverse)
-    monkeypatch.setattr(app_main.maps_service, "find_polling_booths", _fake_booths)
+    monkeypatch.setattr("routers.location.maps_service.reverse_geocode", _fake_reverse)
+    monkeypatch.setattr("routers.location.maps_service.find_polling_booths", _fake_booths)
 
     response = client.post("/api/constituency", json={"lat": 17.385, "lng": 78.4867})
 

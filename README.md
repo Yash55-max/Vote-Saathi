@@ -14,53 +14,26 @@
 
 ---
 
-## 🎯 Project Overview
-
-### 🏗️ Chosen Vertical
-**Civic Tech & Digital Public Infrastructure (DPI)**  
-VoteSaathi is positioned as a digital public utility designed to bridge the information gap in the Indian electoral process, specifically targeting first-time voters, elderly citizens, and differently-abled individuals.
-
-### 🧠 Approach and Logic
-The project follows a **"Context-First"** architecture:
-- **Personalized Logic**: Instead of a generic FAQ, the system uses the user's profile (Age, Voter Status, Location) to calibrate Gemini's responses. A 18-year-old is guided through registration, while a 70-year-old is informed about "Vote from Home" facilities.
-- **Multilingual Foundation**: Logic is abstracted to support India's linguistic diversity, using Gemini's native translation capabilities paired with verified electoral datasets.
-- **Geospatial Discovery**: Mapping logic translates raw coordinates into actionable directions to the nearest verified polling booths.
-
-### 🛠️ How the Solution Works
-1. **User Profiling**: Users authenticate via Firebase and provide minimal demographic data.
-2. **AI Interaction**: Queries sent to the **Ask Saathi** assistant are processed by a FastAPI backend. We use **Google Gemini** with a specialized System Instruction that restricts it to authoritative ECI sources.
-3. **BigQuery Analytics**: All interactions are logged anonymized to **Google BigQuery**, enabling real-time civic participation analytics while maintaining user privacy.
-4. **Cloud Infrastructure**: The backend integrates **Google Cloud Logging** for enterprise-grade observability and is structured for scalability using modular routers.
-5. **Accessibility Engine**: A custom-built engine intercepts the DOM to apply real-time accessibility transformations (Dyslexia fonts, contrast shifts) without page reloads.
-
-### 📝 Assumptions Made
-- **Internet Access**: The platform assumes users have at least a 3G/4G connection for real-time AI and Map rendering.
-- **Location Permissions**: Assumes users will grant location access for accurate constituency mapping.
-- **Verified Sources**: Assumes that information provided via the "Ask Saathi" assistant is cross-referenced with official ECI guidelines provided in the prompt context.
-
----
-
-
 ## 🚀 Key Features
 
 ### 🤖 AI-Powered "Saathi" Assistant
 A context-aware chatbot powered by **Google Gemini** that provides authoritative voting guidance.
 *   **Multilingual Support**: Available in English, Hindi, and Telugu (with support for 6+ more regional languages).
-*   **Personalized Context**: Tailors advice based on the user's age, location, and voting history (First-time vs. Experienced).
+*   **Personalised Context**: Tailors advice based on the user's age, location, and voting history (First-time vs. Experienced).
 
 ### 📍 Real-Time Constituency Mapping
 Integrated with **Google Maps API** for precise geospatial navigation.
-*   **Polling Booth Locator**: Automatically detects the user's constituency and maps nearby polling stations with multi-marker visualization.
+*   **Polling Booth Locator**: Automatically detects the user's constituency and maps nearby polling stations with multi-marker visualisation.
 *   **Live Directions**: Provides exact coordinates and addresses for verified polling booths.
 
 ### ♿ Universal Accessibility Engine
 Built with inclusivity at its core for elderly and differently-abled voters.
 *   **Dynamic Themes**: Support for Light, Dark, and High-Contrast modes.
-*   **Accessibility Toolbar**: One-click toggles for Dyslexia-friendly fonts, Text Scaling, and Screen Reader optimization.
+*   **Accessibility Toolbar**: One-click toggles for Dyslexia-friendly fonts, Text Scaling, and Screen Reader optimisation.
 
 ### 📋 Official Resource Hub
 *   **Direct Links**: Access to the ECI Voter Portal, 1950 Helpline, and Grievance portals.
-*   **Personalized Reminders**: Set election dates and polling day alerts.
+*   **Personalised Reminders**: Set election dates and polling day alerts.
 
 ---
 

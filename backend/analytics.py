@@ -18,7 +18,7 @@ def get_bq_client():
         try:
             _bq_client = bigquery.Client()
         except Exception as e:
-            log.warning(f"⚠️ BigQuery client initialization failed: {e}")
+            log.warning(f"💀 BigQuery client initialization failed: {e}")
     return _bq_client
 
 async def log_interaction(query: str, language: str, age: int | None, location: str | None):
@@ -29,10 +29,9 @@ async def log_interaction(query: str, language: str, age: int | None, location: 
     if not client:
         return
 
-    # Simulation for Hackathon purposes — in production, ensure the table exists
     log.info(f"📊 BigQuery Log | {datetime.utcnow().isoformat()} | {language} | {location}")
     
-    # Example logic for real insertion:
+    # Example logic
     # table_id = f"{client.project}.votesaathi_analytics.interactions"
     # rows_to_insert = [{"timestamp": ..., "lang": language, ...}]
     # client.insert_rows_json(table_id, rows_to_insert)
